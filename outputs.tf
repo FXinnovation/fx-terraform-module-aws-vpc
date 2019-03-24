@@ -8,6 +8,11 @@ output "private_subnets_count" {
   value       = "${var.create_vpc && length(var.private_subnets) > 0 ? length(var.private_subnets) : 0}"
 }
 
+output "total_subnets_count" {
+  description = "Count of all the subnets"
+  value       = "${local.max_subnet_length}"
+}
+
 output "private_extra_subnets_count" {
   description = "Count of private extra subnets"
   value       = "${var.create_vpc && length(var.private_extra_subnets) > 0 ? length(var.private_extra_subnets) : 0}"

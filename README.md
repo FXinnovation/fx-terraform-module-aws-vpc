@@ -214,6 +214,7 @@ This module is not to be deployed directly.
 | redshift\_subnet\_group | ID of redshift subnet group |
 | redshift\_subnets | List of IDs of redshift subnets |
 | redshift\_subnets\_cidr\_blocks | List of cidr_blocks of redshift subnets |
+| total\_subnets\_count | Count of all the subnets |
 | vgw\_id | The ID of the VPN Gateway |
 | vpc\_cidr\_block | The CIDR block of the VPC |
 | vpc\_enable\_dns\_hostnames | Whether or not the VPC has DNS hostname support |
