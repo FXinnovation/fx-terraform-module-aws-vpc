@@ -7,7 +7,7 @@ provider "aws" {
 
 data "aws_security_group" "default" {
   name   = "default"
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = "${module.standard.vpc_id}"
 }
 
 module "standard" {
