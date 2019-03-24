@@ -103,8 +103,8 @@ This module is not to be deployed directly.
 | nat\_gateway\_tags | Additional tags for the NAT gateways | map | `{}` | no |
 | one\_nat\_gateway\_per\_az | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs`. | string | `"false"` | no |
 | private\_acl\_tags | Additional tags for the private subnets network ACL | map | `{}` | no |
-| private\_acl\_tags | Additional tags for the private extra subnets network ACL | map | `{}` | no |
 | private\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private subnets | string | `"false"` | no |
+| private\_extra\_acl\_tags | Additional tags for the private extra subnets network ACL | map | `{}` | no |
 | private\_extra\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private extra subnets | string | `"false"` | no |
 | private\_extra\_inbound\_acl\_rules | Private extra subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | private\_extra\_outbound\_acl\_rules | Private extra subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
@@ -191,7 +191,6 @@ This module is not to be deployed directly.
 | nat\_ids | List of allocation ID of Elastic IPs created for AWS NAT Gateway |
 | nat\_public\_ips | List of public Elastic IPs created for AWS NAT Gateway |
 | natgw\_ids | List of NAT Gateway IDs |
-| private\_extra\_network\_acl\_id | ID of the private network ACL |
 | private\_extra\_network\_acl\_id | ID of the private extra network ACL |
 | private\_extra\_route\_table\_count | Count of private extra route tables |
 | private\_extra\_route\_table\_ids | List of IDs of private extra route tables |

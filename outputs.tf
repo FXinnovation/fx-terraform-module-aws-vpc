@@ -3,10 +3,6 @@
 #####
 
 // Counts for Terraform 0.11.X inability to count modules attributes
-locals {
-  nat_gateway_count = "${var.single_nat_gateway ? 1 : (var.one_nat_gateway_per_az ? length(var.azs) : local.max_subnet_length)}"
-}
-
 output "private_subnets_count" {
   description = "Count of private subnets"
   value       = "${var.create_vpc && length(var.private_subnets) > 0 ? length(var.private_subnets) : 0}"
@@ -74,11 +70,6 @@ output "private_extra_route_table_ids" {
 
 output "private_extra_network_acl_id" {
   description = "ID of the private extra network ACL"
-  value       = "${element(concat(aws_network_acl.private_extra.*.id, list("")), 0)}"
-}
-
-output "private_extra_network_acl_id" {
-  description = "ID of the private network ACL"
   value       = "${element(concat(aws_network_acl.private_extra.*.id, list("")), 0)}"
 }
 

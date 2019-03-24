@@ -27,7 +27,7 @@ variable "private_extra_dedicated_network_acl" {
   default     = false
 }
 
-variable "private_acl_tags" {
+variable "private_extra_acl_tags" {
   description = "Additional tags for the private extra subnets network ACL"
   default     = {}
 }

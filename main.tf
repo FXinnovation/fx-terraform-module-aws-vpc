@@ -4,7 +4,7 @@
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "1.59.0"
+  version = "1.60.0"
 
   azs  = "${var.azs}"
   name = "${var.name}"
