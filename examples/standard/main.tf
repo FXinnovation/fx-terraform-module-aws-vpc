@@ -1,6 +1,6 @@
 provider "aws" {
   version    = "~> 2.2.0"
-  region     = "ca-central-1"
+  region     = "eu-west-1"
   access_key = "${var.access_key}"
   secret_key = "${var.secret_key}"
 }
@@ -17,7 +17,7 @@ module "standard" {
 
   cidr = "10.10.0.0/16"
 
-  azs                   = ["ca-central-1a", "ca-central-1b", "ca-central-1c"]
+  azs                   = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
   private_subnets       = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
   private_extra_subnets = ["10.10.61.0/24", "10.10.62.0/24", "10.10.63.0/24"]
   public_subnets        = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
