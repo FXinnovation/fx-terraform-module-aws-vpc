@@ -25,7 +25,7 @@ output "private_extra_subnets_count" {
 
 output "intra_subnets_count" {
   description = "Count of intra subnets"
-  value       = "${length(aws_subnet.extra.*.id)}"
+  value       = "${length(aws_subnet.intra.*.id)}"
 }
 
 output "database_subnets_count" {
