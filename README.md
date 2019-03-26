@@ -107,6 +107,7 @@ This module is not to be deployed directly.
 | nat\_eip\_suffix | Suffix to append to the NAT EIP | string | `"nat"` | no |
 | nat\_eip\_tags | Additional tags for the NAT EIP | map | `{}` | no |
 | nat\_gateway\_tags | Additional tags for the NAT gateways | map | `{}` | no |
+| natgw\_suffix | Suffix to append to the NAT Gateway | string | `"nat"` | no |
 | one\_nat\_gateway\_per\_az | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs`. | string | `"false"` | no |
 | private\_acl\_tags | Additional tags for the private subnets network ACL | map | `{}` | no |
 | private\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private subnets | string | `"false"` | no |
