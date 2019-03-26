@@ -552,6 +552,11 @@ variable "nat_gateway_tags" {
   default     = {}
 }
 
+variable "nat_eip_suffix" {
+  description = "Suffix to append to the NAT EIP"
+  default     = "nat"
+}
+
 variable "nat_eip_tags" {
   description = "Additional tags for the NAT EIP"
   default     = {}

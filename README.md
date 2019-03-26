@@ -104,6 +104,7 @@ This module is not to be deployed directly.
 | manage\_default\_vpc | Should be true to adopt and manage Default VPC | string | `"false"` | no |
 | map\_public\_ip\_on\_launch | Should be false if you do not want to auto-assign public IP on launch | string | `"true"` | no |
 | name | Name to be used on all the resources as identifier | string | `""` | no |
+| nat\_eip\_suffix | Suffix to append to the NAT EIP | string | `"nat"` | no |
 | nat\_eip\_tags | Additional tags for the NAT EIP | map | `{}` | no |
 | nat\_gateway\_tags | Additional tags for the NAT gateways | map | `{}` | no |
 | one\_nat\_gateway\_per\_az | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs`. | string | `"false"` | no |

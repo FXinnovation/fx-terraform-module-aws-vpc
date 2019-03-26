@@ -648,7 +648,7 @@ resource "aws_eip" "nat" {
 
   vpc = true
 
-  tags = "${merge(map("Name", format("%s-%s", var.name, element(var.azs, (var.single_nat_gateway ? 0 : count.index)))), var.tags, var.nat_eip_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.nat_eip_suffix}-%s", var.name, count.index + 1)), var.tags, var.nat_eip_tags)}"
 }
 
 resource "aws_nat_gateway" "this" {
@@ -657,7 +657,7 @@ resource "aws_nat_gateway" "this" {
   allocation_id = "${element(local.nat_gateway_ips, (var.single_nat_gateway ? 0 : count.index))}"
   subnet_id     = "${element(aws_subnet.public.*.id, (var.single_nat_gateway ? 0 : count.index))}"
 
-  tags = "${merge(map("Name", format("%s-%s", var.name, element(var.azs, (var.single_nat_gateway ? 0 : count.index)))), var.tags, var.nat_gateway_tags)}"
+  tags = "${merge(map("Name", format("%s-%s", var.name, var.azs, count.index + 1)), var.tags, var.nat_gateway_tags)}"
 
   depends_on = ["aws_internet_gateway.this"]
 }
