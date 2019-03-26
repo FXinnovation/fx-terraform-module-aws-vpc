@@ -5,7 +5,7 @@
 
 output "total_subnets_count" {
   description = "Count of all the subnets"
-  value       = "${local.max_subnet_length}"
+  value       = "${length(aws_subnet.public.*.id) + length(aws_subnet.private.*.id) + length(aws_subnet.private_extra.*.id) + length(aws_subnet.database.*.id) + length(aws_subnet.redshift.*.id) + length(aws_subnet.elasticache.*.id)}"
 }
 
 output "public_subnets_count" {
