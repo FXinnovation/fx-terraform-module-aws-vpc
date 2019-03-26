@@ -1,6 +1,6 @@
 #####
 # Counts
-# // Counts for Terraform 0.11.X inability to count modules attributes
+# Counts to mitigate Terraform 0.11.X inability to count modules attributes
 #####
 
 output "total_subnets_count" {
