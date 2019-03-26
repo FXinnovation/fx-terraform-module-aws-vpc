@@ -1,6 +1,11 @@
 # Terraform VPC module
 
-This module extends the [public Terraform VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc/) by adding another private subnet.
+This module is a copy of the [public Terraform VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc/).
+It brings:
+ 
+- Another extra private subnet.
+- AZs prefix are numbers not AZ names.
+- Counts in outputs for Terraform 0.11.X counting issues.
 
 This module is not to be deployed directly.
 
@@ -155,7 +160,6 @@ This module is not to be deployed directly.
 
 | Name | Description |
 |------|-------------|
-| azs | A list of availability zones specified as argument to this module |
 | database\_network\_acl\_id | ID of the database network ACL |
 | database\_route\_table\_count | Count of database route tables |
 | database\_route\_table\_ids | List of IDs of database route tables |
@@ -176,11 +180,13 @@ This module is not to be deployed directly.
 | default\_vpc\_instance\_tenancy | Tenancy of instances spin up within VPC |
 | default\_vpc\_main\_route\_table\_id | The ID of the main route table associated with this VPC |
 | elasticache\_network\_acl\_id | ID of the elasticache network ACL |
+| elasticache\_route\_table\_count | Count of elasticache route tables |
 | elasticache\_route\_table\_ids | List of IDs of elasticache route tables |
 | elasticache\_subnet\_group | ID of elasticache subnet group |
 | elasticache\_subnet\_group\_name | Name of elasticache subnet group |
 | elasticache\_subnets | List of IDs of elasticache subnets |
 | elasticache\_subnets\_cidr\_blocks | List of cidr_blocks of elasticache subnets |
+| elasticache\_subnets\_count | Count of elasticache subnets |
 | igw\_id | The ID of the Internet Gateway |
 | intra\_network\_acl\_id | ID of the intra network ACL |
 | intra\_route\_table\_count | Count of public route tables |
@@ -188,6 +194,7 @@ This module is not to be deployed directly.
 | intra\_subnets | List of IDs of intra subnets |
 | intra\_subnets\_cidr\_blocks | List of cidr_blocks of intra subnets |
 | intra\_subnets\_count | Count of intra subnets |
+| nat\_gateway\_count | Count of NAT Gateways |
 | nat\_ids | List of allocation ID of Elastic IPs created for AWS NAT Gateway |
 | nat\_public\_ips | List of public Elastic IPs created for AWS NAT Gateway |
 | natgw\_ids | List of NAT Gateway IDs |
@@ -210,10 +217,12 @@ This module is not to be deployed directly.
 | public\_subnets\_cidr\_blocks | List of cidr_blocks of public subnets |
 | public\_subnets\_count | Count of public subnets |
 | redshift\_network\_acl\_id | ID of the redshift network ACL |
+| redshift\_route\_table\_count | Count of redshift route tables |
 | redshift\_route\_table\_ids | List of IDs of redshift route tables |
 | redshift\_subnet\_group | ID of redshift subnet group |
 | redshift\_subnets | List of IDs of redshift subnets |
 | redshift\_subnets\_cidr\_blocks | List of cidr_blocks of redshift subnets |
+| redshift\_subnets\_count | Count of redshift subnets |
 | total\_subnets\_count | Count of all the subnets |
 | vgw\_id | The ID of the VPN Gateway |
 | vpc\_cidr\_block | The CIDR block of the VPC |
