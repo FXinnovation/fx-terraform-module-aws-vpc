@@ -100,7 +100,7 @@ resource "aws_route_table" "private" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", (var.single_nat_gateway ? "${var.name}-${var.private_subnet_suffix}" : format("%s-${var.private_subnet_suffix}-%02d", var.name, count.index))), var.tags, var.private_route_table_tags)}"
+  tags = "${merge(map("Name", (var.single_nat_gateway ? "${var.name}-${var.private_subnet_suffix}" : format("%s-${var.private_subnet_suffix}-%02d", var.name, count.index + 1))), var.tags, var.private_route_table_tags)}"
 
   lifecycle {
     ignore_changes = ["propagating_vgws"]
@@ -116,7 +116,7 @@ resource "aws_route_table" "private_extra" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", (var.single_nat_gateway ? "${var.name}-${var.private_extra_subnet_suffix}" : format("%s-${var.private_extra_subnet_suffix}-%02d", var.name, count.index))), var.tags, var.private_extra_route_table_tags)}"
+  tags = "${merge(map("Name", (var.single_nat_gateway ? "${var.name}-${var.private_extra_subnet_suffix}" : format("%s-${var.private_extra_subnet_suffix}-%02d", var.name, count.index + 1))), var.tags, var.private_extra_route_table_tags)}"
 
   lifecycle {
     ignore_changes = ["propagating_vgws"]
@@ -220,7 +220,7 @@ resource "aws_subnet" "public" {
   availability_zone       = "${element(var.azs, count.index)}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 
-  tags = "${merge(map("Name", format("%s-${var.public_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.public_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.public_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.public_subnet_tags)}"
 }
 
 #################
@@ -233,7 +233,7 @@ resource "aws_subnet" "private" {
   cidr_block        = "${var.private_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.private_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.private_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.private_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.private_subnet_tags)}"
 }
 
 ####
@@ -247,7 +247,7 @@ resource "aws_subnet" "private_extra" {
   cidr_block        = "${var.private_extra_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.private_extra_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.private_extra_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.private_extra_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.private_extra_subnet_tags)}"
 }
 
 ##################
@@ -260,7 +260,7 @@ resource "aws_subnet" "database" {
   cidr_block        = "${var.database_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.database_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.database_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.database_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.database_subnet_tags)}"
 }
 
 resource "aws_db_subnet_group" "database" {
@@ -283,7 +283,7 @@ resource "aws_subnet" "redshift" {
   cidr_block        = "${var.redshift_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.redshift_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.redshift_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.redshift_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.redshift_subnet_tags)}"
 }
 
 resource "aws_redshift_subnet_group" "redshift" {
@@ -306,7 +306,7 @@ resource "aws_subnet" "elasticache" {
   cidr_block        = "${var.elasticache_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.elasticache_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.elasticache_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.elasticache_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.elasticache_subnet_tags)}"
 }
 
 resource "aws_elasticache_subnet_group" "elasticache" {
@@ -327,7 +327,7 @@ resource "aws_subnet" "intra" {
   cidr_block        = "${var.intra_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(map("Name", format("%s-${var.intra_subnet_suffix}-%02d", var.name, count.index)), var.tags, var.intra_subnet_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.intra_subnet_suffix}-%02d", var.name, count.index + 1)), var.tags, var.intra_subnet_tags)}"
 }
 
 #######################
