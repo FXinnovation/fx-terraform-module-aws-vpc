@@ -114,7 +114,7 @@ resource "aws_route_table" "private" {
 resource "aws_route_table" "private_extra" {
   count = "${var.create_vpc && local.max_subnet_length > 0 ? local.nat_gateway_count : 0}"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = "${local.vpc_id}"
 
   tags = "${merge(map("Name", (var.single_nat_gateway ? "${var.name}-${var.private_extra_subnet_suffix}" : format("%s-${var.private_extra_subnet_suffix}-%02d", var.name, count.index))), var.tags, var.private_extra_route_table_tags)}"
 
@@ -135,7 +135,7 @@ resource "aws_route" "private_extra_nat_gateway" {
 
   route_table_id         = "${element(aws_route_table.private_extra.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = "${element(module.vpc.natgw_ids, count.index)}"
+  nat_gateway_id         = "${element(aws_nat_gateway.this.*.id, count.index)}"
 
   timeouts {
     create = "5m"
@@ -243,7 +243,7 @@ resource "aws_subnet" "private" {
 resource "aws_subnet" "private_extra" {
   count = "${var.create_vpc && length(var.private_extra_subnets) > 0 ? length(var.private_extra_subnets) : 0}"
 
-  vpc_id            = "${module.vpc.vpc_id}"
+  vpc_id            = "${local.vpc_id}"
   cidr_block        = "${var.private_extra_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
@@ -434,7 +434,7 @@ resource "aws_network_acl_rule" "private_outbound" {
 resource "aws_network_acl" "private_extra" {
   count = "${var.create_vpc && var.private_extra_dedicated_network_acl && length(var.private_extra_subnets) > 0 ? 1 : 0}"
 
-  vpc_id     = "${module.vpc.vpc_id}"
+  vpc_id     = "${local.vpc_id}"
   subnet_ids = ["${aws_subnet.private_extra.*.id}"]
 
   tags = "${merge(map("Name", format("%s-${var.private_extra_subnet_suffix}", var.name)), var.tags, var.private_extra_acl_tags)}"
