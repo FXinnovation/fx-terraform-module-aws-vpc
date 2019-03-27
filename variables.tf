@@ -22,16 +22,6 @@ variable "private_extra_route_table_tags" {
   default     = {}
 }
 
-variable "private_extra_dedicated_network_acl" {
-  description = "Whether to use dedicated network ACL (not default) and custom rules for private extra subnets"
-  default     = false
-}
-
-variable "private_extra_acl_tags" {
-  description = "Additional tags for the private extra subnets network ACL"
-  default     = {}
-}
-
 variable "private_extra_inbound_acl_rules" {
   description = "Private extra subnets inbound network ACLs"
 
@@ -522,6 +512,11 @@ variable "private_acl_tags" {
   default     = {}
 }
 
+variable "private_extra_acl_tags" {
+  description = "Additional tags for the private extra subnets network ACL"
+  default     = {}
+}
+
 variable "intra_acl_tags" {
   description = "Additional tags for the intra subnets network ACL"
   default     = {}
@@ -550,6 +545,16 @@ variable "dhcp_options_tags" {
 variable "nat_gateway_tags" {
   description = "Additional tags for the NAT gateways"
   default     = {}
+}
+
+variable "natgw_suffix" {
+  description = "Suffix to append to the NAT Gateway"
+  default     = "nat"
+}
+
+variable "nat_eip_suffix" {
+  description = "Suffix to append to the NAT EIP"
+  default     = "nat"
 }
 
 variable "nat_eip_tags" {
@@ -647,6 +652,11 @@ variable "public_dedicated_network_acl" {
 
 variable "private_dedicated_network_acl" {
   description = "Whether to use dedicated network ACL (not default) and custom rules for private subnets"
+  default     = false
+}
+
+variable "private_extra_dedicated_network_acl" {
+  description = "Whether to use dedicated network ACL (not default) and custom rules for private extra subnets"
   default     = false
 }
 
