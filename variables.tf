@@ -22,6 +22,11 @@ variable "private_extra_route_table_tags" {
   default     = {}
 }
 
+variable "private_extra_route_table_suffix" {
+  description = "Suffix to append to private extra route tables"
+  default     = "private-extra"
+}
+
 variable "private_extra_inbound_acl_rules" {
   description = "Private extra subnets inbound network ACLs"
 
@@ -470,6 +475,36 @@ variable "elasticache_route_table_tags" {
 variable "intra_route_table_tags" {
   description = "Additional tags for the intra route tables"
   default     = {}
+}
+
+variable "public_route_table_suffix" {
+  description = "Suffix to append to public route tables"
+  default     = "public"
+}
+
+variable "private_route_table_suffix" {
+  description = "Suffix to append to private route tables"
+  default     = "private"
+}
+
+variable "database_route_table_suffix" {
+  description = "Suffix to append to private route tables"
+  default     = "database"
+}
+
+variable "redshift_route_table_suffix" {
+  description = "Suffix to append to redshift route tables"
+  default     = "redshift"
+}
+
+variable "elasticache_route_table_suffix" {
+  description = "Suffix to append to elasticache route tables"
+  default     = "elasticache"
+}
+
+variable "intra_route_table_suffix" {
+  description = "Suffix to append to intra route tables"
+  default     = "intra"
 }
 
 variable "database_subnet_tags" {

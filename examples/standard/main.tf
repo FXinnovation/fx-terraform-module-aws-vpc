@@ -26,6 +26,14 @@ module "standard" {
   redshift_subnets      = ["10.10.41.0/24", "10.10.42.0/24", "10.10.43.0/24"]
   intra_subnets         = ["10.10.51.0/24", "10.10.52.0/24", "10.10.53.0/24"]
 
+  public_route_table_suffix        = "tftest-pubrte"
+  private_route_table_suffix       = "tftest-pvrte"
+  private_extra_route_table_suffix = "tftest-pverte"
+  database_route_table_suffix      = "tftest-datrte"
+  elasticache_route_table_suffix   = "tftest-elarte"
+  redshift_route_table_suffix      = "tftest-redrte"
+  intra_route_table_suffix         = "tftest-intrte"
+
   create_database_subnet_group = false
 
   enable_dns_hostnames = true

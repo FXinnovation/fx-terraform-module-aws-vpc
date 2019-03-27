@@ -34,6 +34,7 @@ This module is not to be deployed directly.
 | database\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for database subnets | string | `"false"` | no |
 | database\_inbound\_acl\_rules | Database subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | database\_outbound\_acl\_rules | Database subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| database\_route\_table\_suffix | Suffix to append to private route tables | string | `"database"` | no |
 | database\_route\_table\_tags | Additional tags for the database route tables | map | `{}` | no |
 | database\_subnet\_group\_tags | Additional tags for the database subnet group | map | `{}` | no |
 | database\_subnet\_suffix | Suffix to append to database subnets name | string | `"db"` | no |
@@ -70,6 +71,7 @@ This module is not to be deployed directly.
 | elasticache\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for elasticache subnets | string | `"false"` | no |
 | elasticache\_inbound\_acl\_rules | Elasticache subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | elasticache\_outbound\_acl\_rules | Elasticache subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| elasticache\_route\_table\_suffix | Suffix to append to elasticache route tables | string | `"elasticache"` | no |
 | elasticache\_route\_table\_tags | Additional tags for the elasticache route tables | map | `{}` | no |
 | elasticache\_subnet\_suffix | Suffix to append to elasticache subnets name | string | `"elasticache"` | no |
 | elasticache\_subnet\_tags | Additional tags for the elasticache subnets | map | `{}` | no |
@@ -96,6 +98,7 @@ This module is not to be deployed directly.
 | intra\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for intra subnets | string | `"false"` | no |
 | intra\_inbound\_acl\_rules | Intra subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | intra\_outbound\_acl\_rules | Intra subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| intra\_route\_table\_suffix | Suffix to append to intra route tables | string | `"intra"` | no |
 | intra\_route\_table\_tags | Additional tags for the intra route tables | map | `{}` | no |
 | intra\_subnet\_suffix | Suffix to append to intra subnets name | string | `"intra"` | no |
 | intra\_subnet\_tags | Additional tags for the intra subnets | map | `{}` | no |
@@ -115,12 +118,14 @@ This module is not to be deployed directly.
 | private\_extra\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private extra subnets | string | `"false"` | no |
 | private\_extra\_inbound\_acl\_rules | Private extra subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | private\_extra\_outbound\_acl\_rules | Private extra subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| private\_extra\_route\_table\_suffix | Suffix to append to private extra route tables | string | `"private-extra"` | no |
 | private\_extra\_route\_table\_tags | Additional tags for the private extra route tables | map | `{}` | no |
 | private\_extra\_subnet\_suffix | Suffix to append to private extra subnets name | string | `"private-extra"` | no |
 | private\_extra\_subnet\_tags | Additional tags for the private extra subnets | map | `{}` | no |
 | private\_extra\_subnets | A list of private extra subnets inside the VPC | list | `[]` | no |
 | private\_inbound\_acl\_rules | Private subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | private\_outbound\_acl\_rules | Private subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| private\_route\_table\_suffix | Suffix to append to private route tables | string | `"private"` | no |
 | private\_route\_table\_tags | Additional tags for the private route tables | map | `{}` | no |
 | private\_subnet\_suffix | Suffix to append to private subnets name | string | `"private"` | no |
 | private\_subnet\_tags | Additional tags for the private subnets | map | `{}` | no |
@@ -131,6 +136,7 @@ This module is not to be deployed directly.
 | public\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for public subnets | string | `"false"` | no |
 | public\_inbound\_acl\_rules | Public subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | public\_outbound\_acl\_rules | Public subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| public\_route\_table\_suffix | Suffix to append to public route tables | string | `"public"` | no |
 | public\_route\_table\_tags | Additional tags for the public route tables | map | `{}` | no |
 | public\_subnet\_suffix | Suffix to append to public subnets name | string | `"public"` | no |
 | public\_subnet\_tags | Additional tags for the public subnets | map | `{}` | no |
@@ -139,6 +145,7 @@ This module is not to be deployed directly.
 | redshift\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for redshift subnets | string | `"false"` | no |
 | redshift\_inbound\_acl\_rules | Redshift subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
 | redshift\_outbound\_acl\_rules | Redshift subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| redshift\_route\_table\_suffix | Suffix to append to redshift route tables | string | `"redshift"` | no |
 | redshift\_route\_table\_tags | Additional tags for the redshift route tables | map | `{}` | no |
 | redshift\_subnet\_group\_tags | Additional tags for the redshift subnet group | map | `{}` | no |
 | redshift\_subnet\_suffix | Suffix to append to redshift subnets name | string | `"redshift"` | no |
