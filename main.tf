@@ -150,7 +150,7 @@ resource "aws_route_table" "database" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", format("%s-${var.database_route_table_suffix}-%02d", var.name, count.index + 1), var.tags, var.database_route_table_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.database_route_table_suffix}-%02d", var.name, count.index + 1)), var.tags, var.database_route_table_tags)}"
 }
 
 resource "aws_route" "database_internet_gateway" {
@@ -184,7 +184,7 @@ resource "aws_route_table" "redshift" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", format("%s-${var.redshift_route_table_suffix}-%02d", var.name, count.index + 1), var.tags, var.redshift_route_table_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.redshift_route_table_suffix}-%02d", var.name, count.index + 1)), var.tags, var.redshift_route_table_tags)}"
 }
 
 #################
@@ -195,7 +195,7 @@ resource "aws_route_table" "elasticache" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", format("%s-${var.elasticache_route_table_suffix}-%02d", var.name, count.index + 1), var.tags, var.elasticache_route_table_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.elasticache_route_table_suffix}-%02d", var.name, count.index + 1)), var.tags, var.elasticache_route_table_tags)}"
 }
 
 #################
@@ -206,7 +206,7 @@ resource "aws_route_table" "intra" {
 
   vpc_id = "${local.vpc_id}"
 
-  tags = "${merge(map("Name", format("%s-${var.intra_route_table_suffix}-%02d", var.name, count.index + 1), var.tags, var.intra_route_table_tags)}"
+  tags = "${merge(map("Name", format("%s-${var.intra_route_table_suffix}-%02d", var.name, count.index + 1)), var.tags, var.intra_route_table_tags)}"
 }
 
 ################
