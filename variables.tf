@@ -940,7 +940,7 @@ variable "elasticache_outbound_acl_rules" {
 }
 
 #####
-# VPC
+# Security Groups
 #####
 
 variable "endpoint_security_group_name" {

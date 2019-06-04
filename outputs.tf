@@ -451,3 +451,12 @@ output "vpc_endpoint_ec2messages_dns_entry" {
   description = "The DNS entries for the VPC Endpoint for EC2MESSAGES."
   value       = "${flatten(aws_vpc_endpoint.ec2messages.*.dns_entry)}"
 }
+
+#####
+# Security Groups
+#####
+
+output "vpc_endpoint_security_group_id" {
+  description = "The default security group ID of used by all the endpoints if not specified."
+  value       = "${aws_security_group.endpoint.id}"
+}
