@@ -112,7 +112,7 @@ resource "aws_route_table" "private" {
 # There are as many routing tables as the number of NAT gateways
 ####
 resource "aws_route_table" "private_extra" {
-  count = "${var.create_vpc && local.max_subnet_length > 0 ? local.nat_gateway_count : 0}"
+  count = "${var.create_vpc && length(var.private_extra_subnets) > 0 && local.max_subnet_length > 0 ? local.nat_gateway_count : 0}"
 
   vpc_id = "${local.vpc_id}"
 
@@ -674,9 +674,10 @@ resource "aws_route" "private_nat_gateway" {
   }
 }
 
-######################
-# VPC Endpoint for S3
-######################
+###
+# Endpoint for S3
+###
+
 data "aws_vpc_endpoint_service" "s3" {
   count = "${var.create_vpc && var.enable_s3_endpoint ? 1 : 0}"
 
@@ -711,9 +712,10 @@ resource "aws_vpc_endpoint_route_table_association" "public_s3" {
   route_table_id  = "${aws_route_table.public.id}"
 }
 
-############################
-# VPC Endpoint for DynamoDB
-############################
+###
+# Endpoint for DynamoDB
+###
+
 data "aws_vpc_endpoint_service" "dynamodb" {
   count = "${var.create_vpc && var.enable_dynamodb_endpoint ? 1 : 0}"
 
@@ -748,9 +750,10 @@ resource "aws_vpc_endpoint_route_table_association" "public_dynamodb" {
   route_table_id  = "${aws_route_table.public.id}"
 }
 
-#######################
-# VPC Endpoint for SSM
-#######################
+###
+# Endpoint for SSM
+###
+
 data "aws_vpc_endpoint_service" "ssm" {
   count = "${var.create_vpc && var.enable_ssm_endpoint ? 1 : 0}"
 
@@ -764,14 +767,15 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name      = "${data.aws_vpc_endpoint_service.ssm.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ssm_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ssm_endpoint_security_group_ids, 0) != "" ? join(",", var.ssm_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ssm_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ssm_endpoint_private_dns_enabled}"
 }
 
-###############################
-# VPC Endpoint for SSMMESSAGES
-###############################
+###
+# Endpoint for SSMMESSAGES
+###
+
 data "aws_vpc_endpoint_service" "ssmmessages" {
   count = "${var.create_vpc && var.enable_ssmmessages_endpoint ? 1 : 0}"
 
@@ -785,14 +789,15 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   service_name      = "${data.aws_vpc_endpoint_service.ssmmessages.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ssmmessages_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ssmmessages_endpoint_security_group_ids, 0) != "" ? join(",", var.ssmmessages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ssmmessages_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ssmmessages_endpoint_private_dns_enabled}"
 }
 
-#######################
+###
 # VPC Endpoint for EC2
-#######################
+###
+
 data "aws_vpc_endpoint_service" "ec2" {
   count = "${var.create_vpc && var.enable_ec2_endpoint ? 1 : 0}"
 
@@ -806,14 +811,15 @@ resource "aws_vpc_endpoint" "ec2" {
   service_name      = "${data.aws_vpc_endpoint_service.ec2.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ec2_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ec2_endpoint_security_group_ids, 0) != "" ? join(",", var.ec2_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ec2_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ec2_endpoint_private_dns_enabled}"
 }
 
-###############################
-# VPC Endpoint for EC2MESSAGES
-###############################
+###
+# Endpoint for EC2MESSAGES
+###
+
 data "aws_vpc_endpoint_service" "ec2messages" {
   count = "${var.create_vpc && var.enable_ec2messages_endpoint ? 1 : 0}"
 
@@ -827,14 +833,15 @@ resource "aws_vpc_endpoint" "ec2messages" {
   service_name      = "${data.aws_vpc_endpoint_service.ec2messages.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ec2messages_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ec2messages_endpoint_security_group_ids, 0) != "" ? join(",", var.ec2messages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ec2messages_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ec2messages_endpoint_private_dns_enabled}"
 }
 
-###########################
-# VPC Endpoint for ECR API
-###########################
+###
+# Endpoint for ECR API
+###
+
 data "aws_vpc_endpoint_service" "ecr_api" {
   count = "${var.create_vpc && var.enable_ecr_api_endpoint ? 1 : 0}"
 
@@ -848,14 +855,15 @@ resource "aws_vpc_endpoint" "ecr_api" {
   service_name      = "${data.aws_vpc_endpoint_service.ecr_api.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ecr_api_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ecr_api_endpoint_security_group_ids, 0) != "" ? join(",", var.ecr_api_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ecr_api_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ecr_api_endpoint_private_dns_enabled}"
 }
 
-###########################
-# VPC Endpoint for ECR DKR
-###########################
+###
+# Endpoint for ECR DKR
+###
+
 data "aws_vpc_endpoint_service" "ecr_dkr" {
   count = "${var.create_vpc && var.enable_ecr_dkr_endpoint ? 1 : 0}"
 
@@ -869,14 +877,15 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   service_name      = "${data.aws_vpc_endpoint_service.ecr_dkr.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.ecr_dkr_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.ecr_dkr_endpoint_security_group_ids, 0) != "" ? join(",", var.ecr_dkr_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ecr_dkr_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ecr_dkr_endpoint_private_dns_enabled}"
 }
 
-#######################
-# VPC Endpoint for API Gateway
-#######################
+###
+# Endpoint for API Gateway
+###
+
 data "aws_vpc_endpoint_service" "apigw" {
   count = "${var.create_vpc && var.enable_apigw_endpoint ? 1 : 0}"
 
@@ -890,14 +899,15 @@ resource "aws_vpc_endpoint" "apigw" {
   service_name      = "${data.aws_vpc_endpoint_service.apigw.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${var.apigw_endpoint_security_group_ids}"]
+  security_group_ids  = ["${split(",", element(var.apigw_endpoint_security_group_ids, 0) != "" ? join(",", var.apigw_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.apigw_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.apigw_endpoint_private_dns_enabled}"
 }
 
-##########################
+###
 # Route table association
-##########################
+###
+
 resource "aws_route_table_association" "private" {
   count = "${var.create_vpc && length(var.private_subnets) > 0 ? length(var.private_subnets) : 0}"
 
