@@ -458,5 +458,5 @@ output "vpc_endpoint_ec2messages_dns_entry" {
 
 output "vpc_endpoint_security_group_id" {
   description = "The default security group ID of used by all the endpoints if not specified."
-  value       = "${aws_security_group.endpoint.id}"
+  value       = "${element(concat(aws_security_group.endpoint.*.id, list("")), 0)}"
 }
