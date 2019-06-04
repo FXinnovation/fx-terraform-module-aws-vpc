@@ -767,7 +767,7 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name      = "${data.aws_vpc_endpoint_service.ssm.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ssm_endpoint_security_group_ids, 0) != "" ? join(",", var.ssm_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ssm_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ssm_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ssm_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ssm_endpoint_private_dns_enabled}"
 }
@@ -789,7 +789,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   service_name      = "${data.aws_vpc_endpoint_service.ssmmessages.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ssmmessages_endpoint_security_group_ids, 0) != "" ? join(",", var.ssmmessages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ssmmessages_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ssmmessages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ssmmessages_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ssmmessages_endpoint_private_dns_enabled}"
 }
@@ -811,7 +811,7 @@ resource "aws_vpc_endpoint" "ec2" {
   service_name      = "${data.aws_vpc_endpoint_service.ec2.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ec2_endpoint_security_group_ids, 0) != "" ? join(",", var.ec2_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ec2_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ec2_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ec2_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ec2_endpoint_private_dns_enabled}"
 }
@@ -833,7 +833,7 @@ resource "aws_vpc_endpoint" "ec2messages" {
   service_name      = "${data.aws_vpc_endpoint_service.ec2messages.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ec2messages_endpoint_security_group_ids, 0) != "" ? join(",", var.ec2messages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ec2messages_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ec2messages_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ec2messages_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ec2messages_endpoint_private_dns_enabled}"
 }
@@ -855,7 +855,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
   service_name      = "${data.aws_vpc_endpoint_service.ecr_api.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ecr_api_endpoint_security_group_ids, 0) != "" ? join(",", var.ecr_api_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ecr_api_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ecr_api_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ecr_api_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ecr_api_endpoint_private_dns_enabled}"
 }
@@ -877,7 +877,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   service_name      = "${data.aws_vpc_endpoint_service.ecr_dkr.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.ecr_dkr_endpoint_security_group_ids, 0) != "" ? join(",", var.ecr_dkr_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.ecr_dkr_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ecr_dkr_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.ecr_dkr_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.ecr_dkr_endpoint_private_dns_enabled}"
 }
@@ -899,7 +899,7 @@ resource "aws_vpc_endpoint" "apigw" {
   service_name      = "${data.aws_vpc_endpoint_service.apigw.service_name}"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids  = ["${split(",", element(var.apigw_endpoint_security_group_ids, 0) != "" ? join(",", var.apigw_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  security_group_ids  = ["${split(",", element(concat(var.apigw_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.apigw_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.apigw_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.apigw_endpoint_private_dns_enabled}"
 }
