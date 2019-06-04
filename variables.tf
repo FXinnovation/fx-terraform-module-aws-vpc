@@ -938,3 +938,12 @@ variable "elasticache_outbound_acl_rules" {
     },
   ]
 }
+
+#####
+# VPC
+#####
+
+variable "endpoint_security_group_name" {
+  description = "Name of the default security group used by endpoints if not specifically defined."
+  default     = "default-endpoints"
+}

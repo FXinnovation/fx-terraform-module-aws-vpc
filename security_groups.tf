@@ -6,7 +6,7 @@ resource "aws_security_group" "endpoint" {
   vpc_id      = "${var.vpc_id}"
 
   tags = "${merge(
-    map("Name", "${var.security_group_name}"),
+    map("Name", "${var.endpoint_security_group_name}"),
     map("Terraform", "true"),
     var.tags
   )}"
