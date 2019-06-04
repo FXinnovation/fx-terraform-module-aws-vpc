@@ -63,11 +63,9 @@ module "standard" {
 
   enable_ec2_endpoint              = true
   ec2_endpoint_private_dns_enabled = true
-  ec2_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
   enable_ec2messages_endpoint              = true
   ec2messages_endpoint_private_dns_enabled = true
-  ec2messages_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
   enable_ecr_api_endpoint              = true
   ecr_api_endpoint_private_dns_enabled = true
