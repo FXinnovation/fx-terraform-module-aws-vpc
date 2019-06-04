@@ -3,7 +3,7 @@ resource "aws_security_group" "endpoint" {
 
   name        = "${var.endpoint_security_group_name}"
   description = "For VPC Endpoints"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${local.vpc_id}"
 
   tags = "${merge(
     map("Name", "${var.endpoint_security_group_name}"),
@@ -15,7 +15,7 @@ resource "aws_security_group" "endpoint" {
 resource "aws_security_group_rule" "endpoint_in_443" {
   count = "${var.create_vpc ? 1 : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${aws_security_group.endpoint.id}"
   type              = "ingress"
   description       = "From VPC CIDR"
 
