@@ -1,4 +1,4 @@
-@Library('fxinnovationpublic@hotfix/terraform_fmt') _
+@Library('fxinnovation-public@hotfix/terraform_fmt') _
 
 fxTerraformWithUsernamePassword(
   testEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
