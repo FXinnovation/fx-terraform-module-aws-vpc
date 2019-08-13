@@ -1,4 +1,4 @@
-@Library('pipeline-jenkins@hotfix/terraform_fmt') _
+@Library('com.fxinnovation.public-common-pipeline-jenkins@hotfix/terraform_fmt') _
 
 fxTerraformWithUsernamePassword(
   testEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
