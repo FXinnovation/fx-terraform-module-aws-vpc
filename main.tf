@@ -938,6 +938,7 @@ resource "aws_vpc_endpoint" "cloudwatch_logs" {
   security_group_ids  = ["${split(",", element(concat(var.cloudwatch_logs_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.cloudwatch_logs_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.cloudwatch_logs_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.cloudwatch_logs_endpoint_private_dns_enabled}"
+
 }
 
 ###
