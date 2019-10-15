@@ -923,8 +923,7 @@ resource "aws_vpc_endpoint" "apigw" {
 ###
 
 data "aws_vpc_endpoint_service" "cloudwatch_logs" {
-  count = "${var.create_vpc && var.enable_cloudwatch_logs_endpoint ? 1 : 0}"
-
+  count   = "${var.create_vpc && var.enable_cloudwatch_logs_endpoint ? 1 : 0}"
   service = "logs"
 }
 
@@ -938,7 +937,6 @@ resource "aws_vpc_endpoint" "cloudwatch_logs" {
   security_group_ids  = ["${split(",", element(concat(var.cloudwatch_logs_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.cloudwatch_logs_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
   subnet_ids          = ["${coalescelist(var.cloudwatch_logs_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
   private_dns_enabled = "${var.cloudwatch_logs_endpoint_private_dns_enabled}"
-
 }
 
 ###
