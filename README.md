@@ -21,6 +21,9 @@ This module is not to be deployed directly.
 | assign\_generated\_ipv6\_cidr\_block | Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block | string | `"false"` | no |
 | azs | A list of availability zones in the region | list | `[]` | no |
 | cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/0"` | no |
+| cloudwatch\_logs\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for cloudwatch logs endpoint | string | `"false"` | no |
+| cloudwatch\_logs\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for cloudwatch logs endpoint | list | `[]` | no |
+| cloudwatch\_logs\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for cloudwatch logs endpoint. If omitted, private subnets will be used. | list | `[]` | no |
 | create\_database\_internet\_gateway\_route | Controls if an internet gateway route for public database access should be created | string | `"false"` | no |
 | create\_database\_nat\_gateway\_route | Controls if a nat gateway route should be created to give internet access to the database subnets | string | `"false"` | no |
 | create\_database\_subnet\_group | Controls if database subnet group should be created | string | `"true"` | no |
@@ -77,6 +80,7 @@ This module is not to be deployed directly.
 | elasticache\_subnet\_tags | Additional tags for the elasticache subnets | map | `{}` | no |
 | elasticache\_subnets | A list of elasticache subnets | list | `[]` | no |
 | enable\_apigw\_endpoint | Should be true if you want to provision an api gateway endpoint to the VPC | string | `"false"` | no |
+| enable\_cloudwatch\_logs\_endpoint | Should be true if you want to provision a cloudwatch logs endpoint to the VPC | string | `"false"` | no |
 | enable\_dhcp\_options | Should be true if you want to specify a DHCP options set with a custom domain name, DNS servers, NTP servers, netbios servers, and/or netbios server type | string | `"false"` | no |
 | enable\_dns\_hostnames | Should be true to enable DNS hostnames in the VPC | string | `"false"` | no |
 | enable\_dns\_support | Should be true to enable DNS support in the VPC | string | `"true"` | no |
@@ -238,6 +242,9 @@ This module is not to be deployed directly.
 | vpc\_cidr\_block | The CIDR block of the VPC |
 | vpc\_enable\_dns\_hostnames | Whether or not the VPC has DNS hostname support |
 | vpc\_enable\_dns\_support | Whether or not the VPC has DNS support |
+| vpc\_endpoint\_cloudwatch\_logs\_dns\_entry | The DNS entries for the VPC Endpoint cloudwatch logs. |
+| vpc\_endpoint\_cloudwatch\_logs\_id | The ID of VPC endpoint cloudwatch logs. |
+| vpc\_endpoint\_cloudwatch\_logs\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint cloudwatch logs. |
 | vpc\_endpoint\_dynamodb\_id | The ID of VPC endpoint for DynamoDB |
 | vpc\_endpoint\_dynamodb\_pl\_id | The prefix list for the DynamoDB VPC endpoint. |
 | vpc\_endpoint\_ec2\_dns\_entry | The DNS entries for the VPC Endpoint for EC2. |

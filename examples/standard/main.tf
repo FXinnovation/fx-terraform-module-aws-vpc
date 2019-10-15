@@ -75,6 +75,10 @@ module "standard" {
   ecr_dkr_endpoint_private_dns_enabled = true
   ecr_dkr_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
+  enable_cloudwatch_logs_endpoint              = true
+  cloudwatch_logs_endpoint_private_dns_enabled = true
+  cloudwatch_logs_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+
   tags = {
     Owner       = "user"
     Environment = "staging"
