@@ -12,6 +12,7 @@ locals {
 ######
 # VPC
 ######
+
 resource "aws_vpc" "this" {
   count = "${var.create_vpc ? 1 : 0}"
 
@@ -154,7 +155,7 @@ resource "aws_route_table" "database" {
 }
 
 resource "aws_route" "database_internet_gateway" {
-  count = "${var.create_vpc && var.create_database_subnet_route_table && length(var.database_subnets) > 0 && var.create_database_internet_gateway_route && !var.create_database_nat_gateway_route ? 1 : 0}"
+  count = "${var.create_vpc && var.create_database_subnet_route_table && length(var.database_subnets) > 0 && var.create_database_internet_gateway_route && ! var.create_database_nat_gateway_route ? 1 : 0}"
 
   route_table_id         = "${aws_route_table.database.id}"
   destination_cidr_block = "0.0.0.0/0"
@@ -166,7 +167,7 @@ resource "aws_route" "database_internet_gateway" {
 }
 
 resource "aws_route" "database_nat_gateway" {
-  count                  = "${var.create_vpc && var.create_database_subnet_route_table && length(var.database_subnets) > 0 && !var.create_database_internet_gateway_route && var.create_database_nat_gateway_route && var.enable_nat_gateway ? local.nat_gateway_count : 0}"
+  count                  = "${var.create_vpc && var.create_database_subnet_route_table && length(var.database_subnets) > 0 && ! var.create_database_internet_gateway_route && var.create_database_nat_gateway_route && var.enable_nat_gateway ? local.nat_gateway_count : 0}"
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${element(aws_nat_gateway.this.*.id, count.index)}"
@@ -213,7 +214,7 @@ resource "aws_route_table" "intra" {
 # Public subnet
 ################
 resource "aws_subnet" "public" {
-  count = "${var.create_vpc && length(var.public_subnets) > 0 && (!var.one_nat_gateway_per_az || length(var.public_subnets) >= length(var.azs)) ? length(var.public_subnets) : 0}"
+  count = "${var.create_vpc && length(var.public_subnets) > 0 && (! var.one_nat_gateway_per_az || length(var.public_subnets) >= length(var.azs)) ? length(var.public_subnets) : 0}"
 
   vpc_id                  = "${local.vpc_id}"
   cidr_block              = "${element(concat(var.public_subnets, list("")), count.index)}"
@@ -644,7 +645,7 @@ locals {
 }
 
 resource "aws_eip" "nat" {
-  count = "${var.create_vpc && (var.enable_nat_gateway && !var.reuse_nat_ips) ? local.nat_gateway_count : 0}"
+  count = "${var.create_vpc && (var.enable_nat_gateway && ! var.reuse_nat_ips) ? local.nat_gateway_count : 0}"
 
   vpc = true
 
@@ -919,6 +920,27 @@ resource "aws_vpc_endpoint" "apigw" {
 }
 
 ###
+# Endpoint for Cloudwatch logs
+###
+
+data "aws_vpc_endpoint_service" "cloudwatch_logs" {
+  count   = "${var.create_vpc && var.enable_cloudwatch_logs_endpoint ? 1 : 0}"
+  service = "logs"
+}
+
+resource "aws_vpc_endpoint" "cloudwatch_logs" {
+  count = "${var.create_vpc && var.enable_cloudwatch_logs_endpoint ? 1 : 0}"
+
+  vpc_id            = "${local.vpc_id}"
+  service_name      = "${data.aws_vpc_endpoint_service.cloudwatch_logs.service_name}"
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids  = ["${split(",", element(concat(var.cloudwatch_logs_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.cloudwatch_logs_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  subnet_ids          = ["${coalescelist(var.cloudwatch_logs_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
+  private_dns_enabled = "${var.cloudwatch_logs_endpoint_private_dns_enabled}"
+}
+
+###
 # Route table association
 ###
 
@@ -937,7 +959,7 @@ resource "aws_route_table_association" "database" {
 }
 
 resource "aws_route_table_association" "redshift" {
-  count = "${var.create_vpc && length(var.redshift_subnets) > 0 && !var.enable_public_redshift ? length(var.redshift_subnets) : 0}"
+  count = "${var.create_vpc && length(var.redshift_subnets) > 0 && ! var.enable_public_redshift ? length(var.redshift_subnets) : 0}"
 
   subnet_id      = "${element(aws_subnet.redshift.*.id, count.index)}"
   route_table_id = "${element(coalescelist(aws_route_table.redshift.*.id, aws_route_table.private.*.id), (var.single_nat_gateway || var.create_redshift_subnet_route_table ? 0 : count.index))}"

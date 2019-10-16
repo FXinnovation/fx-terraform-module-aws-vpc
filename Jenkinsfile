@@ -1,4 +1,5 @@
 fxTerraformWithUsernamePassword(
+  preCommitDockerImageName: 'fxinnovation/pre-commit:0.1.2',
   testEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
   publishEnvironmentCredentialId: 'itoa-application-awscollectors-awscred',
   providerUsernameVariableName: 'access_key',

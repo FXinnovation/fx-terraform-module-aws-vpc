@@ -452,6 +452,21 @@ output "vpc_endpoint_ec2messages_dns_entry" {
   value       = "${flatten(aws_vpc_endpoint.ec2messages.*.dns_entry)}"
 }
 
+output "vpc_endpoint_cloudwatch_logs_id" {
+  description = "The ID of VPC endpoint cloudwatch logs."
+  value       = "${element(concat(aws_vpc_endpoint.cloudwatch_logs.*.id, list("")), 0)}"
+}
+
+output "vpc_endpoint_cloudwatch_logs_network_interface_ids" {
+  description = "One or more network interfaces for the VPC Endpoint cloudwatch logs."
+  value       = "${flatten(aws_vpc_endpoint.cloudwatch_logs.*.network_interface_ids)}"
+}
+
+output "vpc_endpoint_cloudwatch_logs_dns_entry" {
+  description = "The DNS entries for the VPC Endpoint cloudwatch logs."
+  value       = "${flatten(aws_vpc_endpoint.cloudwatch_logs.*.dns_entry)}"
+}
+
 #####
 # Security Groups
 #####
