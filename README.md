@@ -1,5 +1,8 @@
 # Terraform VPC module
 
+## IMPORTANT NOTE
+This module is officially **DEPRECATED** in favor of the public version since terraform 0.12 is out. **DO NOT MIGRATE THIS MODULE TO TERRAFORM 0.12!**
+
 This module is a copy of the [public Terraform VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc/).
 It brings:
  
