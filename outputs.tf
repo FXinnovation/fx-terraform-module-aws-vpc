@@ -1013,3 +1013,38 @@ output "name" {
   description = "The name of the VPC specified as argument to this module"
   value       = var.name
 }
+
+output "public_internet_gateway_route_id" {
+  description = "ID of the internet gateway route."
+  value       = element(concat(aws_route.public_internet_gateway.*.id, [""]), 0)
+}
+
+output "public_public_internet_gateway_ipv6_route_id" {
+  description = "ID of the IPv6 internet gateway route."
+  value       = element(concat(aws_route.public_internet_gateway_ipv6.*.id, [""]), 0)
+}
+
+output "private_nat_gateway_route_ids" {
+  description = "IDs of the private nat gateway route."
+  value       = aws_route.private_nat_gateway.*.id
+}
+
+output "private_ipv6_egress_route_ids" {
+  description = "IDs of the ipv6 egress route."
+  value       = aws_route.private_ipv6_egress.*.id
+}
+
+output "public_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = aws_route_table_association.public.*.id
+}
+
+output "private_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = aws_route_table_association.private.*.id
+}
+
+output "intra_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = aws_route_table_association.intra.*.id
+}

@@ -1,8 +1,8 @@
 provider "aws" {
-  version    = "~> 2.2.0"
+  version    = "~> 2.23.0"
   region     = "eu-west-1"
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 data "aws_security_group" "default" {
@@ -24,13 +24,6 @@ module "standard" {
   elasticache_subnets = ["10.10.31.0/24", "10.10.32.0/24", "10.10.33.0/24"]
   redshift_subnets    = ["10.10.41.0/24", "10.10.42.0/24", "10.10.43.0/24"]
   intra_subnets       = ["10.10.51.0/24", "10.10.52.0/24", "10.10.53.0/24"]
-
-  public_route_table_suffix      = "tftest-pubrte"
-  private_route_table_suffix     = "tftest-pvrte"
-  database_route_table_suffix    = "tftest-datrte"
-  elasticache_route_table_suffix = "tftest-elarte"
-  redshift_route_table_suffix    = "tftest-redrte"
-  intra_route_table_suffix       = "tftest-intrte"
 
   create_database_subnet_group = false
 
@@ -59,12 +52,6 @@ module "standard" {
   ssmmessages_endpoint_private_dns_enabled = true
   ssmmessages_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
-  enable_ec2_endpoint              = true
-  ec2_endpoint_private_dns_enabled = true
-
-  enable_ec2messages_endpoint              = true
-  ec2messages_endpoint_private_dns_enabled = true
-
   enable_ecr_api_endpoint              = true
   ecr_api_endpoint_private_dns_enabled = true
   ecr_api_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
@@ -72,10 +59,6 @@ module "standard" {
   enable_ecr_dkr_endpoint              = true
   ecr_dkr_endpoint_private_dns_enabled = true
   ecr_dkr_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
-
-  enable_cloudwatch_logs_endpoint              = true
-  cloudwatch_logs_endpoint_private_dns_enabled = true
-  cloudwatch_logs_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
   tags = {
     Owner       = "user"

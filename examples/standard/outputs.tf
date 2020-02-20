@@ -68,3 +68,42 @@ output "vpc_endpoint_ssm_dns_entry" {
   description = "The DNS entries for the VPC Endpoint for SSM."
   value       = module.standard.vpc_endpoint_ssm_dns_entry
 }
+
+#####
+# Route table
+#####
+
+output "public_internet_gateway_route_id" {
+  description = "ID of the internet gateway route."
+  value       = module.standard.public_internet_gateway_route_id
+}
+
+output "public_public_internet_gateway_ipv6_route_id" {
+  description = "ID of the IPv6 internet gateway route."
+  value       = module.standard.public_public_internet_gateway_ipv6_route_id
+}
+
+output "private_nat_gateway_route_ids" {
+  description = "IDs of the private nat gateway route."
+  value       = module.standard.private_nat_gateway_route_ids
+}
+
+output "private_ipv6_egress_route_ids" {
+  description = "IDs of the ipv6 egress route."
+  value       = module.standard.private_ipv6_egress_route_ids
+}
+
+output "public_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = module.standard.public_route_table_association_ids
+}
+
+output "private_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = module.standard.private_route_table_association_ids
+}
+
+output "intra_route_table_association_ids" {
+  description = "IDs of the public route table association"
+  value       = module.standard.intra_route_table_association_ids
+}

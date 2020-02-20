@@ -19,7 +19,7 @@ Note that this example may create resources which can cost money (AWS Elastic IP
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.2.0 |
+| aws | ~> 2.23.0 |
 
 ## Inputs
 
@@ -34,9 +34,16 @@ Note that this example may create resources which can cost money (AWS Elastic IP
 |------|-------------|
 | database\_subnets | List of IDs of database subnets |
 | elasticache\_subnets | List of IDs of elasticache subnets |
+| intra\_route\_table\_association\_ids | IDs of the public route table association |
 | intra\_subnets | List of IDs of intra subnets |
 | nat\_public\_ips | List of public Elastic IPs created for AWS NAT Gateway |
+| private\_ipv6\_egress\_route\_ids | IDs of the ipv6 egress route. |
+| private\_nat\_gateway\_route\_ids | IDs of the private nat gateway route. |
+| private\_route\_table\_association\_ids | IDs of the public route table association |
 | private\_subnets | List of IDs of private subnets |
+| public\_internet\_gateway\_route\_id | ID of the internet gateway route. |
+| public\_public\_internet\_gateway\_ipv6\_route\_id | ID of the IPv6 internet gateway route. |
+| public\_route\_table\_association\_ids | IDs of the public route table association |
 | public\_subnets | List of IDs of public subnets |
 | redshift\_subnets | List of IDs of redshift subnets |
 | vpc\_endpoint\_ssm\_dns\_entry | The DNS entries for the VPC Endpoint for SSM. |

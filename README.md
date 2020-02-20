@@ -350,6 +350,7 @@ This module is not to be deployed directly.
 | elasticache\_subnets\_ipv6\_cidr\_blocks | List of IPv6 cidr\_blocks of elasticache subnets in an IPv6 enabled VPC |
 | igw\_id | The ID of the Internet Gateway |
 | intra\_network\_acl\_id | ID of the intra network ACL |
+| intra\_route\_table\_association\_ids | IDs of the public route table association |
 | intra\_route\_table\_ids | List of IDs of intra route tables |
 | intra\_subnet\_arns | List of ARNs of intra subnets |
 | intra\_subnets | List of IDs of intra subnets |
@@ -359,13 +360,19 @@ This module is not to be deployed directly.
 | nat\_ids | List of allocation ID of Elastic IPs created for AWS NAT Gateway |
 | nat\_public\_ips | List of public Elastic IPs created for AWS NAT Gateway |
 | natgw\_ids | List of NAT Gateway IDs |
+| private\_ipv6\_egress\_route\_ids | IDs of the ipv6 egress route. |
+| private\_nat\_gateway\_route\_ids | IDs of the private nat gateway route. |
 | private\_network\_acl\_id | ID of the private network ACL |
+| private\_route\_table\_association\_ids | IDs of the public route table association |
 | private\_route\_table\_ids | List of IDs of private route tables |
 | private\_subnet\_arns | List of ARNs of private subnets |
 | private\_subnets | List of IDs of private subnets |
 | private\_subnets\_cidr\_blocks | List of cidr\_blocks of private subnets |
 | private\_subnets\_ipv6\_cidr\_blocks | List of IPv6 cidr\_blocks of private subnets in an IPv6 enabled VPC |
+| public\_internet\_gateway\_route\_id | ID of the internet gateway route. |
 | public\_network\_acl\_id | ID of the public network ACL |
+| public\_public\_internet\_gateway\_ipv6\_route\_id | ID of the IPv6 internet gateway route. |
+| public\_route\_table\_association\_ids | IDs of the public route table association |
 | public\_route\_table\_ids | List of IDs of public route tables |
 | public\_subnet\_arns | List of ARNs of public subnets |
 | public\_subnets | List of IDs of public subnets |
