@@ -7,7 +7,7 @@ provider "aws" {
 
 data "aws_security_group" "default" {
   name   = "default"
-  vpc_id = "${module.standard.vpc_id}"
+  vpc_id = module.standard.vpc_id
 }
 
 module "standard" {
@@ -17,22 +17,20 @@ module "standard" {
 
   cidr = "10.10.0.0/16"
 
-  azs                   = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-  private_subnets       = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-  private_extra_subnets = ["10.10.61.0/24", "10.10.62.0/24", "10.10.63.0/24"]
-  public_subnets        = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
-  database_subnets      = ["10.10.21.0/24", "10.10.22.0/24", "10.10.23.0/24"]
-  elasticache_subnets   = ["10.10.31.0/24", "10.10.32.0/24", "10.10.33.0/24"]
-  redshift_subnets      = ["10.10.41.0/24", "10.10.42.0/24", "10.10.43.0/24"]
-  intra_subnets         = ["10.10.51.0/24", "10.10.52.0/24", "10.10.53.0/24"]
+  azs                 = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  private_subnets     = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
+  public_subnets      = ["10.10.11.0/24", "10.10.12.0/24", "10.10.13.0/24"]
+  database_subnets    = ["10.10.21.0/24", "10.10.22.0/24", "10.10.23.0/24"]
+  elasticache_subnets = ["10.10.31.0/24", "10.10.32.0/24", "10.10.33.0/24"]
+  redshift_subnets    = ["10.10.41.0/24", "10.10.42.0/24", "10.10.43.0/24"]
+  intra_subnets       = ["10.10.51.0/24", "10.10.52.0/24", "10.10.53.0/24"]
 
-  public_route_table_suffix        = "tftest-pubrte"
-  private_route_table_suffix       = "tftest-pvrte"
-  private_extra_route_table_suffix = "tftest-pverte"
-  database_route_table_suffix      = "tftest-datrte"
-  elasticache_route_table_suffix   = "tftest-elarte"
-  redshift_route_table_suffix      = "tftest-redrte"
-  intra_route_table_suffix         = "tftest-intrte"
+  public_route_table_suffix      = "tftest-pubrte"
+  private_route_table_suffix     = "tftest-pvrte"
+  database_route_table_suffix    = "tftest-datrte"
+  elasticache_route_table_suffix = "tftest-elarte"
+  redshift_route_table_suffix    = "tftest-redrte"
+  intra_route_table_suffix       = "tftest-intrte"
 
   create_database_subnet_group = false
 
