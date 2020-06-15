@@ -132,7 +132,7 @@ resource "aws_route_table_association" "private_extra" {
 }
 
 resource "aws_route" "private_extra_nat_gateway" {
-  count = "${var.create_vpc && var.enable_nat_gateway ? local.nat_gateway_count : 0}"
+  count = "${var.create_vpc && length(var.private_extra_subnets) > 0 && var.enable_nat_gateway ? local.nat_gateway_count : 0}"
 
   route_table_id         = "${element(aws_route_table.private_extra.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
