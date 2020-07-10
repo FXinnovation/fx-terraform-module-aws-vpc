@@ -247,6 +247,11 @@ variable "enable_dynamodb_endpoint" {
   default     = false
 }
 
+variable "enable_kms_endpoint" {
+  description = "Should be true if you want to provision a KMS endpoint to the VPC"
+  default     = false
+}
+
 variable "enable_s3_endpoint" {
   description = "Should be true if you want to provision an S3 endpoint to the VPC"
   default     = false

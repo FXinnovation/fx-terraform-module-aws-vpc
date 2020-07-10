@@ -53,6 +53,8 @@ module "standard" {
 
   enable_dynamodb_endpoint = true
 
+  enable_kms_endpoint = true
+
   enable_ssm_endpoint              = true
   ssm_endpoint_private_dns_enabled = true
   ssm_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"] # ssm_endpoint_subnet_ids = ["..."]

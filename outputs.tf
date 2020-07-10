@@ -392,6 +392,16 @@ output "vpc_endpoint_dynamodb_pl_id" {
   value       = "${element(concat(aws_vpc_endpoint.dynamodb.*.prefix_list_id, list("")), 0)}"
 }
 
+output "vpc_endpoint_kms_id" {
+  description = "The ID of VPC endpoint for DynamoDB"
+  value       = "${element(concat(aws_vpc_endpoint.kms.*.id, list("")), 0)}"
+}
+
+output "vpc_endpoint_kms_pl_id" {
+  description = "The prefix list for the DynamoDB VPC endpoint."
+  value       = "${element(concat(aws_vpc_endpoint.kms.*.prefix_list_id, list("")), 0)}"
+}
+
 output "vpc_endpoint_ssm_id" {
   description = "The ID of VPC endpoint for SSM"
   value       = "${element(concat(aws_vpc_endpoint.ssm.*.id, list("")), 0)}"
