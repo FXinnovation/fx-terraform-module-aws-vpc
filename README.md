@@ -92,7 +92,7 @@ This module is not to be deployed directly.
 | enable\_ec2messages\_endpoint | Should be true if you want to provision an EC2MESSAGES endpoint to the VPC | string | `"false"` | no |
 | enable\_ecr\_api\_endpoint | Should be true if you want to provision an ecr api endpoint to the VPC | string | `"false"` | no |
 | enable\_ecr\_dkr\_endpoint | Should be true if you want to provision an ecr dkr endpoint to the VPC | string | `"false"` | no |
-| enable\_kms\_endpoint | Should be true if you want to provision a KMS endpoint to the VPC | string | `"false"` | no |
+| enable\_kms\_endpoint | Should be true if you want to provision an KMS endpoint to the VPC | string | `"false"` | no |
 | enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `"false"` | no |
 | enable\_public\_redshift | Controls if redshift should have public routing table | string | `"false"` | no |
 | enable\_s3\_endpoint | Should be true if you want to provision an S3 endpoint to the VPC | string | `"false"` | no |
@@ -112,6 +112,9 @@ This module is not to be deployed directly.
 | intra\_subnet\_suffix | Suffix to append to intra subnets name | string | `"intra"` | no |
 | intra\_subnet\_tags | Additional tags for the intra subnets | map | `{}` | no |
 | intra\_subnets | A list of intra subnets | list | `[]` | no |
+| kms\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for SSM endpoint | string | `"false"` | no |
+| kms\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for KMS endpoint | list | `[]` | no |
+| kms\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for KMS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
 | manage\_default\_network\_acl | Should be true to adopt and manage Default Network ACL | string | `"false"` | no |
 | manage\_default\_vpc | Should be true to adopt and manage Default VPC | string | `"false"` | no |
 | map\_public\_ip\_on\_launch | Should be false if you do not want to auto-assign public IP on launch | string | `"true"` | no |
@@ -257,8 +260,9 @@ This module is not to be deployed directly.
 | vpc\_endpoint\_ec2messages\_dns\_entry | The DNS entries for the VPC Endpoint for EC2MESSAGES. |
 | vpc\_endpoint\_ec2messages\_id | The ID of VPC endpoint for EC2MESSAGES |
 | vpc\_endpoint\_ec2messages\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint for EC2MESSAGES |
-| vpc\_endpoint\_kms\_id | The ID of VPC endpoint for DynamoDB |
-| vpc\_endpoint\_kms\_pl\_id | The prefix list for the DynamoDB VPC endpoint. |
+| vpc\_endpoint\_kms\_dns\_entry | The DNS entries for the VPC Endpoint for KMS. |
+| vpc\_endpoint\_kms\_id | The ID of VPC endpoint for KMS |
+| vpc\_endpoint\_kms\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint for KMS. |
 | vpc\_endpoint\_s3\_id | The ID of VPC endpoint for S3 |
 | vpc\_endpoint\_s3\_pl\_id | The prefix list for the S3 VPC endpoint. |
 | vpc\_endpoint\_security\_group\_id | The default security group ID of used by all the endpoints if not specified. |

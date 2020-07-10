@@ -393,13 +393,18 @@ output "vpc_endpoint_dynamodb_pl_id" {
 }
 
 output "vpc_endpoint_kms_id" {
-  description = "The ID of VPC endpoint for DynamoDB"
+  description = "The ID of VPC endpoint for KMS"
   value       = "${element(concat(aws_vpc_endpoint.kms.*.id, list("")), 0)}"
 }
 
-output "vpc_endpoint_kms_pl_id" {
-  description = "The prefix list for the DynamoDB VPC endpoint."
-  value       = "${element(concat(aws_vpc_endpoint.kms.*.prefix_list_id, list("")), 0)}"
+output "vpc_endpoint_kms_network_interface_ids" {
+  description = "One or more network interfaces for the VPC Endpoint for KMS."
+  value       = "${flatten(aws_vpc_endpoint.kms.*.network_interface_ids)}"
+}
+
+output "vpc_endpoint_kms_dns_entry" {
+  description = "The DNS entries for the VPC Endpoint for KMS."
+  value       = "${flatten(aws_vpc_endpoint.kms.*.dns_entry)}"
 }
 
 output "vpc_endpoint_ssm_id" {
