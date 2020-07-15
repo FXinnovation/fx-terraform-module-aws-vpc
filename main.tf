@@ -766,6 +766,28 @@ resource "aws_vpc_endpoint_route_table_association" "public_dynamodb" {
 }
 
 ###
+# Endpoint for KMS
+###
+
+data "aws_vpc_endpoint_service" "kms" {
+  count = "${var.create_vpc && var.enable_kms_endpoint ? 1 : 0}"
+
+  service = "kms"
+}
+
+resource "aws_vpc_endpoint" "kms" {
+  count = "${var.create_vpc && var.enable_kms_endpoint ? 1 : 0}"
+
+  vpc_id            = "${local.vpc_id}"
+  service_name      = "${data.aws_vpc_endpoint_service.kms.service_name}"
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids  = ["${split(",", element(concat(var.kms_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.kms_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  subnet_ids          = ["${coalescelist(var.kms_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
+  private_dns_enabled = "${var.kms_endpoint_private_dns_enabled}"
+}
+
+###
 # Endpoint for SSM
 ###
 
