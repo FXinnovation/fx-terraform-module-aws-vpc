@@ -3,6 +3,7 @@
 ## 0.6.0
 
 * feat: Add STS endpoint
+* test: Add assume role
 
 ## 0.5.0
 
