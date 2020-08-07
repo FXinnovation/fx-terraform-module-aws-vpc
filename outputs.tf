@@ -407,6 +407,21 @@ output "vpc_endpoint_kms_dns_entry" {
   value       = "${flatten(aws_vpc_endpoint.kms.*.dns_entry)}"
 }
 
+output "vpc_endpoint_sts_id" {
+  description = "The ID of VPC endpoint for STS"
+  value       = "${element(concat(aws_vpc_endpoint.sts.*.id, list("")), 0)}"
+}
+
+output "vpc_endpoint_sts_network_interface_ids" {
+  description = "One or more network interfaces for the VPC Endpoint for STS."
+  value       = "${flatten(aws_vpc_endpoint.sts.*.network_interface_ids)}"
+}
+
+output "vpc_endpoint_sts_dns_entry" {
+  description = "The DNS entries for the VPC Endpoint for STS."
+  value       = "${flatten(aws_vpc_endpoint.sts.*.dns_entry)}"
+}
+
 output "vpc_endpoint_ssm_id" {
   description = "The ID of VPC endpoint for SSM"
   value       = "${element(concat(aws_vpc_endpoint.ssm.*.id, list("")), 0)}"

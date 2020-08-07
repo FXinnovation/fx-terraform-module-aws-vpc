@@ -267,6 +267,26 @@ variable "kms_endpoint_private_dns_enabled" {
   default     = false
 }
 
+variable "enable_sts_endpoint" {
+  description = "Should be true if you want to provision an STS endpoint to the VPC"
+  default     = false
+}
+
+variable "sts_endpoint_security_group_ids" {
+  description = "The ID of one or more security groups to associate with the network interface for STS endpoint"
+  default     = []
+}
+
+variable "sts_endpoint_subnet_ids" {
+  description = "The ID of one or more subnets in which to create a network interface for STS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used."
+  default     = []
+}
+
+variable "sts_endpoint_private_dns_enabled" {
+  description = "Whether or not to associate a private hosted zone with the specified VPC for SSM endpoint"
+  default     = false
+}
+
 variable "enable_s3_endpoint" {
   description = "Should be true if you want to provision an S3 endpoint to the VPC"
   default     = false
