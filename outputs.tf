@@ -498,17 +498,17 @@ output "vpc_endpoint_cloudwatch_logs_dns_entry" {
 }
 
 output "vpc_endpoint_monitoring_id" {
-  description = "The ID of VPC endpoint cloudwatch logs."
+  description = "The ID of VPC endpoint monitoring."
   value       = "${element(concat(aws_vpc_endpoint.monitoring.*.id, list("")), 0)}"
 }
 
 output "vpc_endpoint_monitoring_network_interface_ids" {
-  description = "One or more network interfaces for the VPC Endpoint cloudwatch logs."
+  description = "One or more network interfaces for the VPC Endpoint monitoring."
   value       = "${flatten(aws_vpc_endpoint.monitoring.*.network_interface_ids)}"
 }
 
 output "vpc_endpoint_monitoring_dns_entry" {
-  description = "The DNS entries for the VPC Endpoint cloudwatch logs."
+  description = "The DNS entries for the VPC Endpoint monitoring."
   value       = "${flatten(aws_vpc_endpoint.monitoring.*.dns_entry)}"
 }
 

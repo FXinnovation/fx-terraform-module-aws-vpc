@@ -271,9 +271,9 @@ This module is not to be deployed directly.
 | vpc\_endpoint\_kms\_dns\_entry | The DNS entries for the VPC Endpoint for KMS. |
 | vpc\_endpoint\_kms\_id | The ID of VPC endpoint for KMS |
 | vpc\_endpoint\_kms\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint for KMS. |
-| vpc\_endpoint\_monitoring\_dns\_entry | The DNS entries for the VPC Endpoint cloudwatch logs. |
-| vpc\_endpoint\_monitoring\_id | The ID of VPC endpoint cloudwatch logs. |
-| vpc\_endpoint\_monitoring\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint cloudwatch logs. |
+| vpc\_endpoint\_monitoring\_dns\_entry | The DNS entries for the VPC Endpoint monitoring. |
+| vpc\_endpoint\_monitoring\_id | The ID of VPC endpoint monitoring. |
+| vpc\_endpoint\_monitoring\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint monitoring. |
 | vpc\_endpoint\_s3\_id | The ID of VPC endpoint for S3 |
 | vpc\_endpoint\_s3\_pl\_id | The prefix list for the S3 VPC endpoint. |
 | vpc\_endpoint\_security\_group\_id | The default security group ID of used by all the endpoints if not specified. |
