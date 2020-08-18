@@ -7,5 +7,5 @@ fxTerraformWithUsernamePassword(
   initSSHCredentialId: 'gitea-fx_administrator-key',
   commonOptions: [
     dockerImage: 'fxinnovation/terraform:2.5.0'
-  ] 
+  ]
 )

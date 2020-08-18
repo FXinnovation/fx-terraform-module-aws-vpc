@@ -985,6 +985,28 @@ resource "aws_vpc_endpoint" "cloudwatch_logs" {
 }
 
 ###
+# VPC Endpoint for CloudWatch Monitoring
+###
+
+data "aws_vpc_endpoint_service" "monitoring" {
+  count = "${var.create_vpc && var.enable_monitoring_endpoint ? 1 : 0}"
+
+  service = "monitoring"
+}
+
+resource "aws_vpc_endpoint" "monitoring" {
+  count = "${var.create_vpc && var.enable_monitoring_endpoint ? 1 : 0}"
+
+  vpc_id            = "${local.vpc_id}"
+  service_name      = "${element(concat(data.aws_vpc_endpoint_service.monitoring.*.service_name, list("")), 0)}"
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids  = ["${split(",", element(concat(var.monitoring_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.monitoring_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  subnet_ids          = ["${coalescelist(var.monitoring_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
+  private_dns_enabled = "${var.monitoring_endpoint_private_dns_enabled}"
+}
+
+###
 # Route table association
 ###
 

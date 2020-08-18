@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.7.0
+
+* feat: Add monitoring endpoint
+* test: Add outputs in example
+
 ## 0.6.0
 
 * feat: Add STS endpoint

@@ -5,7 +5,7 @@ This module is officially **DEPRECATED** in favor of the public version since te
 
 This module is a copy of the [public Terraform VPC module](https://github.com/terraform-aws-modules/terraform-aws-vpc/).
 It brings:
- 
+
 - Another extra private subnet.
 - AZs prefix are numbers not AZ names.
 - Counts in outputs for Terraform 0.11.X counting issues.
@@ -19,14 +19,14 @@ This module is not to be deployed directly.
 |------|-------------|:----:|:-----:|:-----:|
 | amazon\_side\_asn | The Autonomous System Number (ASN) for the Amazon side of the gateway. By default the virtual private gateway is created with the current default Amazon ASN. | string | `"64512"` | no |
 | apigw\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for API GW endpoint | string | `"false"` | no |
-| apigw\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for API GW  endpoint | list | `[]` | no |
-| apigw\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for API GW endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| apigw\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for API GW  endpoint | list | `<list>` | no |
+| apigw\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for API GW endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | assign\_generated\_ipv6\_cidr\_block | Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block | string | `"false"` | no |
-| azs | A list of availability zones in the region | list | `[]` | no |
+| azs | A list of availability zones in the region | list | `<list>` | no |
 | cidr | The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | string | `"0.0.0.0/0"` | no |
 | cloudwatch\_logs\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for cloudwatch logs endpoint | string | `"false"` | no |
-| cloudwatch\_logs\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for cloudwatch logs endpoint | list | `[]` | no |
-| cloudwatch\_logs\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for cloudwatch logs endpoint. If omitted, private subnets will be used. | list | `[]` | no |
+| cloudwatch\_logs\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for cloudwatch logs endpoint | list | `<list>` | no |
+| cloudwatch\_logs\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for cloudwatch logs endpoint. If omitted, private subnets will be used. | list | `<list>` | no |
 | create\_database\_internet\_gateway\_route | Controls if an internet gateway route for public database access should be created | string | `"false"` | no |
 | create\_database\_nat\_gateway\_route | Controls if a nat gateway route should be created to give internet access to the database subnets | string | `"false"` | no |
 | create\_database\_subnet\_group | Controls if database subnet group should be created | string | `"true"` | no |
@@ -36,52 +36,52 @@ This module is not to be deployed directly.
 | create\_redshift\_subnet\_group | Controls if redshift subnet group should be created | string | `"true"` | no |
 | create\_redshift\_subnet\_route\_table | Controls if separate route table for redshift should be created | string | `"false"` | no |
 | create\_vpc | Controls if VPC should be created (it affects almost all resources) | string | `"true"` | no |
-| database\_acl\_tags | Additional tags for the database subnets network ACL | map | `{}` | no |
+| database\_acl\_tags | Additional tags for the database subnets network ACL | map | `<map>` | no |
 | database\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for database subnets | string | `"false"` | no |
-| database\_inbound\_acl\_rules | Database subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| database\_outbound\_acl\_rules | Database subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| database\_inbound\_acl\_rules | Database subnets inbound network ACL rules | list | `<list>` | no |
+| database\_outbound\_acl\_rules | Database subnets outbound network ACL rules | list | `<list>` | no |
 | database\_route\_table\_suffix | Suffix to append to private route tables | string | `"database"` | no |
-| database\_route\_table\_tags | Additional tags for the database route tables | map | `{}` | no |
-| database\_subnet\_group\_tags | Additional tags for the database subnet group | map | `{}` | no |
+| database\_route\_table\_tags | Additional tags for the database route tables | map | `<map>` | no |
+| database\_subnet\_group\_tags | Additional tags for the database subnet group | map | `<map>` | no |
 | database\_subnet\_suffix | Suffix to append to database subnets name | string | `"db"` | no |
-| database\_subnet\_tags | Additional tags for the database subnets | map | `{}` | no |
-| database\_subnets | A list of database subnets | list | `[]` | no |
-| default\_network\_acl\_egress | List of maps of egress rules to set on the Default Network ACL | list | `[ { "action": "allow", "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_no": 100, "to_port": 0 }, { "action": "allow", "from_port": 0, "ipv6_cidr_block": "::/0", "protocol": "-1", "rule_no": 101, "to_port": 0 } ]` | no |
-| default\_network\_acl\_ingress | List of maps of ingress rules to set on the Default Network ACL | list | `[ { "action": "allow", "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_no": 100, "to_port": 0 }, { "action": "allow", "from_port": 0, "ipv6_cidr_block": "::/0", "protocol": "-1", "rule_no": 101, "to_port": 0 } ]` | no |
+| database\_subnet\_tags | Additional tags for the database subnets | map | `<map>` | no |
+| database\_subnets | A list of database subnets | list | `<list>` | no |
+| default\_network\_acl\_egress | List of maps of egress rules to set on the Default Network ACL | list | `<list>` | no |
+| default\_network\_acl\_ingress | List of maps of ingress rules to set on the Default Network ACL | list | `<list>` | no |
 | default\_network\_acl\_name | Name to be used on the Default Network ACL | string | `""` | no |
-| default\_network\_acl\_tags | Additional tags for the Default Network ACL | map | `{}` | no |
+| default\_network\_acl\_tags | Additional tags for the Default Network ACL | map | `<map>` | no |
 | default\_vpc\_enable\_classiclink | Should be true to enable ClassicLink in the Default VPC | string | `"false"` | no |
 | default\_vpc\_enable\_dns\_hostnames | Should be true to enable DNS hostnames in the Default VPC | string | `"false"` | no |
 | default\_vpc\_enable\_dns\_support | Should be true to enable DNS support in the Default VPC | string | `"true"` | no |
 | default\_vpc\_name | Name to be used on the Default VPC | string | `""` | no |
-| default\_vpc\_tags | Additional tags for the Default VPC | map | `{}` | no |
+| default\_vpc\_tags | Additional tags for the Default VPC | map | `<map>` | no |
 | dhcp\_options\_domain\_name | Specifies DNS name for DHCP options set | string | `""` | no |
-| dhcp\_options\_domain\_name\_servers | Specify a list of DNS server addresses for DHCP options set, default to AWS provided | list | `[ "AmazonProvidedDNS" ]` | no |
-| dhcp\_options\_netbios\_name\_servers | Specify a list of netbios servers for DHCP options set | list | `[]` | no |
+| dhcp\_options\_domain\_name\_servers | Specify a list of DNS server addresses for DHCP options set, default to AWS provided | list | `<list>` | no |
+| dhcp\_options\_netbios\_name\_servers | Specify a list of netbios servers for DHCP options set | list | `<list>` | no |
 | dhcp\_options\_netbios\_node\_type | Specify netbios node_type for DHCP options set | string | `""` | no |
-| dhcp\_options\_ntp\_servers | Specify a list of NTP servers for DHCP options set | list | `[]` | no |
-| dhcp\_options\_tags | Additional tags for the DHCP option set | map | `{}` | no |
+| dhcp\_options\_ntp\_servers | Specify a list of NTP servers for DHCP options set | list | `<list>` | no |
+| dhcp\_options\_tags | Additional tags for the DHCP option set | map | `<map>` | no |
 | ec2\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for EC2 endpoint | string | `"false"` | no |
-| ec2\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for EC2 endpoint | list | `[]` | no |
-| ec2\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for EC2 endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| ec2\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for EC2 endpoint | list | `<list>` | no |
+| ec2\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for EC2 endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | ec2messages\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for EC2MESSAGES endpoint | string | `"false"` | no |
-| ec2messages\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for EC2MESSAGES endpoint | list | `[]` | no |
-| ec2messages\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for EC2MESSAGES endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| ec2messages\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for EC2MESSAGES endpoint | list | `<list>` | no |
+| ec2messages\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for EC2MESSAGES endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | ecr\_api\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for ECR API endpoint | string | `"false"` | no |
-| ecr\_api\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for ECR API endpoint | list | `[]` | no |
-| ecr\_api\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for ECR api endpoint. If omitted, private subnets will be used. | list | `[]` | no |
+| ecr\_api\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for ECR API endpoint | list | `<list>` | no |
+| ecr\_api\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for ECR api endpoint. If omitted, private subnets will be used. | list | `<list>` | no |
 | ecr\_dkr\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for ECR DKR endpoint | string | `"false"` | no |
-| ecr\_dkr\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for ECR DKR endpoint | list | `[]` | no |
-| ecr\_dkr\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for ECR dkr endpoint. If omitted, private subnets will be used. | list | `[]` | no |
-| elasticache\_acl\_tags | Additional tags for the elasticache subnets network ACL | map | `{}` | no |
+| ecr\_dkr\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for ECR DKR endpoint | list | `<list>` | no |
+| ecr\_dkr\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for ECR dkr endpoint. If omitted, private subnets will be used. | list | `<list>` | no |
+| elasticache\_acl\_tags | Additional tags for the elasticache subnets network ACL | map | `<map>` | no |
 | elasticache\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for elasticache subnets | string | `"false"` | no |
-| elasticache\_inbound\_acl\_rules | Elasticache subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| elasticache\_outbound\_acl\_rules | Elasticache subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| elasticache\_inbound\_acl\_rules | Elasticache subnets inbound network ACL rules | list | `<list>` | no |
+| elasticache\_outbound\_acl\_rules | Elasticache subnets outbound network ACL rules | list | `<list>` | no |
 | elasticache\_route\_table\_suffix | Suffix to append to elasticache route tables | string | `"elasticache"` | no |
-| elasticache\_route\_table\_tags | Additional tags for the elasticache route tables | map | `{}` | no |
+| elasticache\_route\_table\_tags | Additional tags for the elasticache route tables | map | `<map>` | no |
 | elasticache\_subnet\_suffix | Suffix to append to elasticache subnets name | string | `"elasticache"` | no |
-| elasticache\_subnet\_tags | Additional tags for the elasticache subnets | map | `{}` | no |
-| elasticache\_subnets | A list of elasticache subnets | list | `[]` | no |
+| elasticache\_subnet\_tags | Additional tags for the elasticache subnets | map | `<map>` | no |
+| elasticache\_subnets | A list of elasticache subnets | list | `<list>` | no |
 | enable\_apigw\_endpoint | Should be true if you want to provision an api gateway endpoint to the VPC | string | `"false"` | no |
 | enable\_cloudwatch\_logs\_endpoint | Should be true if you want to provision a cloudwatch logs endpoint to the VPC | string | `"false"` | no |
 | enable\_dhcp\_options | Should be true if you want to specify a DHCP options set with a custom domain name, DNS servers, NTP servers, netbios servers, and/or netbios server type | string | `"false"` | no |
@@ -93,6 +93,7 @@ This module is not to be deployed directly.
 | enable\_ecr\_api\_endpoint | Should be true if you want to provision an ecr api endpoint to the VPC | string | `"false"` | no |
 | enable\_ecr\_dkr\_endpoint | Should be true if you want to provision an ecr dkr endpoint to the VPC | string | `"false"` | no |
 | enable\_kms\_endpoint | Should be true if you want to provision an KMS endpoint to the VPC | string | `"false"` | no |
+| enable\_monitoring\_endpoint | Should be true if you want to provision a CloudWatch Monitoring endpoint to the VPC | string | `"false"` | no |
 | enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | string | `"false"` | no |
 | enable\_public\_redshift | Controls if redshift should have public routing table | string | `"false"` | no |
 | enable\_s3\_endpoint | Should be true if you want to provision an S3 endpoint to the VPC | string | `"false"` | no |
@@ -101,85 +102,88 @@ This module is not to be deployed directly.
 | enable\_sts\_endpoint | Should be true if you want to provision an STS endpoint to the VPC | string | `"false"` | no |
 | enable\_vpn\_gateway | Should be true if you want to create a new VPN Gateway resource and attach it to the VPC | string | `"false"` | no |
 | endpoint\_security\_group\_name | Name of the default security group used by endpoints if not specifically defined. | string | `"default-endpoints"` | no |
-| external\_nat\_ip\_ids | List of EIP IDs to be assigned to the NAT Gateways (used in combination with reuse_nat_ips) | list | `[]` | no |
-| igw\_tags | Additional tags for the internet gateway | map | `{}` | no |
+| external\_nat\_ip\_ids | List of EIP IDs to be assigned to the NAT Gateways (used in combination with reuse_nat_ips) | list | `<list>` | no |
+| igw\_tags | Additional tags for the internet gateway | map | `<map>` | no |
 | instance\_tenancy | A tenancy option for instances launched into the VPC | string | `"default"` | no |
-| intra\_acl\_tags | Additional tags for the intra subnets network ACL | map | `{}` | no |
+| intra\_acl\_tags | Additional tags for the intra subnets network ACL | map | `<map>` | no |
 | intra\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for intra subnets | string | `"false"` | no |
-| intra\_inbound\_acl\_rules | Intra subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| intra\_outbound\_acl\_rules | Intra subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| intra\_inbound\_acl\_rules | Intra subnets inbound network ACLs | list | `<list>` | no |
+| intra\_outbound\_acl\_rules | Intra subnets outbound network ACLs | list | `<list>` | no |
 | intra\_route\_table\_suffix | Suffix to append to intra route tables | string | `"intra"` | no |
-| intra\_route\_table\_tags | Additional tags for the intra route tables | map | `{}` | no |
+| intra\_route\_table\_tags | Additional tags for the intra route tables | map | `<map>` | no |
 | intra\_subnet\_suffix | Suffix to append to intra subnets name | string | `"intra"` | no |
-| intra\_subnet\_tags | Additional tags for the intra subnets | map | `{}` | no |
-| intra\_subnets | A list of intra subnets | list | `[]` | no |
+| intra\_subnet\_tags | Additional tags for the intra subnets | map | `<map>` | no |
+| intra\_subnets | A list of intra subnets | list | `<list>` | no |
 | kms\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for SSM endpoint | string | `"false"` | no |
-| kms\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for KMS endpoint | list | `[]` | no |
-| kms\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for KMS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| kms\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for KMS endpoint | list | `<list>` | no |
+| kms\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for KMS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | manage\_default\_network\_acl | Should be true to adopt and manage Default Network ACL | string | `"false"` | no |
 | manage\_default\_vpc | Should be true to adopt and manage Default VPC | string | `"false"` | no |
 | map\_public\_ip\_on\_launch | Should be false if you do not want to auto-assign public IP on launch | string | `"true"` | no |
+| monitoring\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for CloudWatch Monitoring endpoint | string | `"false"` | no |
+| monitoring\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for CloudWatch Monitoring endpoint | list | `<list>` | no |
+| monitoring\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for CloudWatch Monitoring endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | name | Name to be used on all the resources as identifier | string | `""` | no |
 | nat\_eip\_suffix | Suffix to append to the NAT EIP | string | `"nat"` | no |
-| nat\_eip\_tags | Additional tags for the NAT EIP | map | `{}` | no |
-| nat\_gateway\_tags | Additional tags for the NAT gateways | map | `{}` | no |
+| nat\_eip\_tags | Additional tags for the NAT EIP | map | `<map>` | no |
+| nat\_gateway\_tags | Additional tags for the NAT gateways | map | `<map>` | no |
 | natgw\_suffix | Suffix to append to the NAT Gateway | string | `"nat"` | no |
 | one\_nat\_gateway\_per\_az | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs`. | string | `"false"` | no |
-| private\_acl\_tags | Additional tags for the private subnets network ACL | map | `{}` | no |
+| private\_acl\_tags | Additional tags for the private subnets network ACL | map | `<map>` | no |
 | private\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private subnets | string | `"false"` | no |
-| private\_extra\_acl\_tags | Additional tags for the private extra subnets network ACL | map | `{}` | no |
+| private\_extra\_acl\_tags | Additional tags for the private extra subnets network ACL | map | `<map>` | no |
 | private\_extra\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for private extra subnets | string | `"false"` | no |
-| private\_extra\_inbound\_acl\_rules | Private extra subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| private\_extra\_outbound\_acl\_rules | Private extra subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| private\_extra\_inbound\_acl\_rules | Private extra subnets inbound network ACLs | list | `<list>` | no |
+| private\_extra\_outbound\_acl\_rules | Private extra subnets outbound network ACLs | list | `<list>` | no |
 | private\_extra\_route\_table\_suffix | Suffix to append to private extra route tables | string | `"private-extra"` | no |
-| private\_extra\_route\_table\_tags | Additional tags for the private extra route tables | map | `{}` | no |
+| private\_extra\_route\_table\_tags | Additional tags for the private extra route tables | map | `<map>` | no |
 | private\_extra\_subnet\_suffix | Suffix to append to private extra subnets name | string | `"private-extra"` | no |
-| private\_extra\_subnet\_tags | Additional tags for the private extra subnets | map | `{}` | no |
-| private\_extra\_subnets | A list of private extra subnets inside the VPC | list | `[]` | no |
-| private\_inbound\_acl\_rules | Private subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| private\_outbound\_acl\_rules | Private subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| private\_extra\_subnet\_tags | Additional tags for the private extra subnets | map | `<map>` | no |
+| private\_extra\_subnets | A list of private extra subnets inside the VPC | list | `<list>` | no |
+| private\_inbound\_acl\_rules | Private subnets inbound network ACLs | list | `<list>` | no |
+| private\_outbound\_acl\_rules | Private subnets outbound network ACLs | list | `<list>` | no |
 | private\_route\_table\_suffix | Suffix to append to private route tables | string | `"private"` | no |
-| private\_route\_table\_tags | Additional tags for the private route tables | map | `{}` | no |
+| private\_route\_table\_tags | Additional tags for the private route tables | map | `<map>` | no |
 | private\_subnet\_suffix | Suffix to append to private subnets name | string | `"private"` | no |
-| private\_subnet\_tags | Additional tags for the private subnets | map | `{}` | no |
-| private\_subnets | A list of private subnets inside the VPC | list | `[]` | no |
+| private\_subnet\_tags | Additional tags for the private subnets | map | `<map>` | no |
+| private\_subnets | A list of private subnets inside the VPC | list | `<list>` | no |
 | propagate\_private\_route\_tables\_vgw | Should be true if you want route table propagation | string | `"false"` | no |
 | propagate\_public\_route\_tables\_vgw | Should be true if you want route table propagation | string | `"false"` | no |
-| public\_acl\_tags | Additional tags for the public subnets network ACL | map | `{}` | no |
+| public\_acl\_tags | Additional tags for the public subnets network ACL | map | `<map>` | no |
 | public\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for public subnets | string | `"false"` | no |
-| public\_inbound\_acl\_rules | Public subnets inbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| public\_outbound\_acl\_rules | Public subnets outbound network ACLs | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| public\_inbound\_acl\_rules | Public subnets inbound network ACLs | list | `<list>` | no |
+| public\_outbound\_acl\_rules | Public subnets outbound network ACLs | list | `<list>` | no |
 | public\_route\_table\_suffix | Suffix to append to public route tables | string | `"public"` | no |
-| public\_route\_table\_tags | Additional tags for the public route tables | map | `{}` | no |
+| public\_route\_table\_tags | Additional tags for the public route tables | map | `<map>` | no |
 | public\_subnet\_suffix | Suffix to append to public subnets name | string | `"public"` | no |
-| public\_subnet\_tags | Additional tags for the public subnets | map | `{}` | no |
-| public\_subnets | A list of public subnets inside the VPC | list | `[]` | no |
-| redshift\_acl\_tags | Additional tags for the redshift subnets network ACL | map | `{}` | no |
+| public\_subnet\_tags | Additional tags for the public subnets | map | `<map>` | no |
+| public\_subnets | A list of public subnets inside the VPC | list | `<list>` | no |
+| redshift\_acl\_tags | Additional tags for the redshift subnets network ACL | map | `<map>` | no |
 | redshift\_dedicated\_network\_acl | Whether to use dedicated network ACL (not default) and custom rules for redshift subnets | string | `"false"` | no |
-| redshift\_inbound\_acl\_rules | Redshift subnets inbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
-| redshift\_outbound\_acl\_rules | Redshift subnets outbound network ACL rules | list | `[ { "cidr_block": "0.0.0.0/0", "from_port": 0, "protocol": "-1", "rule_action": "allow", "rule_number": 100, "to_port": 0 } ]` | no |
+| redshift\_inbound\_acl\_rules | Redshift subnets inbound network ACL rules | list | `<list>` | no |
+| redshift\_outbound\_acl\_rules | Redshift subnets outbound network ACL rules | list | `<list>` | no |
 | redshift\_route\_table\_suffix | Suffix to append to redshift route tables | string | `"redshift"` | no |
-| redshift\_route\_table\_tags | Additional tags for the redshift route tables | map | `{}` | no |
-| redshift\_subnet\_group\_tags | Additional tags for the redshift subnet group | map | `{}` | no |
+| redshift\_route\_table\_tags | Additional tags for the redshift route tables | map | `<map>` | no |
+| redshift\_subnet\_group\_tags | Additional tags for the redshift subnet group | map | `<map>` | no |
 | redshift\_subnet\_suffix | Suffix to append to redshift subnets name | string | `"redshift"` | no |
-| redshift\_subnet\_tags | Additional tags for the redshift subnets | map | `{}` | no |
-| redshift\_subnets | A list of redshift subnets | list | `[]` | no |
+| redshift\_subnet\_tags | Additional tags for the redshift subnets | map | `<map>` | no |
+| redshift\_subnets | A list of redshift subnets | list | `<list>` | no |
 | reuse\_nat\_ips | Should be true if you don't want EIPs to be created for your NAT Gateways and will instead pass them in via the 'external_nat_ip_ids' variable | string | `"false"` | no |
-| secondary\_cidr\_blocks | List of secondary CIDR blocks to associate with the VPC to extend the IP Address pool | list | `[]` | no |
+| secondary\_cidr\_blocks | List of secondary CIDR blocks to associate with the VPC to extend the IP Address pool | list | `<list>` | no |
 | single\_nat\_gateway | Should be true if you want to provision a single shared NAT Gateway across all of your private networks | string | `"false"` | no |
 | ssm\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for SSM endpoint | string | `"false"` | no |
-| ssm\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for SSM endpoint | list | `[]` | no |
-| ssm\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for SSM endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| ssm\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for SSM endpoint | list | `<list>` | no |
+| ssm\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for SSM endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | ssmmessages\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for SSMMESSAGES endpoint | string | `"false"` | no |
-| ssmmessages\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for SSMMESSAGES endpoint | list | `[]` | no |
-| ssmmessages\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for SSMMESSAGES endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
+| ssmmessages\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for SSMMESSAGES endpoint | list | `<list>` | no |
+| ssmmessages\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for SSMMESSAGES endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
 | sts\_endpoint\_private\_dns\_enabled | Whether or not to associate a private hosted zone with the specified VPC for SSM endpoint | string | `"false"` | no |
-| sts\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for STS endpoint | list | `[]` | no |
-| sts\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for STS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `[]` | no |
-| tags | A map of tags to add to all resources | map | `{}` | no |
-| vpc\_tags | Additional tags for the VPC | map | `{}` | no |
+| sts\_endpoint\_security\_group\_ids | The ID of one or more security groups to associate with the network interface for STS endpoint | list | `<list>` | no |
+| sts\_endpoint\_subnet\_ids | The ID of one or more subnets in which to create a network interface for STS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used. | list | `<list>` | no |
+| tags | A map of tags to add to all resources | map | `<map>` | no |
+| vpc\_tags | Additional tags for the VPC | map | `<map>` | no |
 | vpn\_gateway\_id | ID of VPN Gateway to attach to the VPC | string | `""` | no |
-| vpn\_gateway\_tags | Additional tags for the VPN gateway | map | `{}` | no |
+| vpn\_gateway\_tags | Additional tags for the VPN gateway | map | `<map>` | no |
 
 ## Outputs
 
@@ -267,6 +271,9 @@ This module is not to be deployed directly.
 | vpc\_endpoint\_kms\_dns\_entry | The DNS entries for the VPC Endpoint for KMS. |
 | vpc\_endpoint\_kms\_id | The ID of VPC endpoint for KMS |
 | vpc\_endpoint\_kms\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint for KMS. |
+| vpc\_endpoint\_monitoring\_dns\_entry | The DNS entries for the VPC Endpoint cloudwatch logs. |
+| vpc\_endpoint\_monitoring\_id | The ID of VPC endpoint cloudwatch logs. |
+| vpc\_endpoint\_monitoring\_network\_interface\_ids | One or more network interfaces for the VPC Endpoint cloudwatch logs. |
 | vpc\_endpoint\_s3\_id | The ID of VPC endpoint for S3 |
 | vpc\_endpoint\_s3\_pl\_id | The prefix list for the S3 VPC endpoint. |
 | vpc\_endpoint\_security\_group\_id | The default security group ID of used by all the endpoints if not specified. |

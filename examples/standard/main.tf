@@ -92,6 +92,10 @@ module "standard" {
   cloudwatch_logs_endpoint_private_dns_enabled = true
   cloudwatch_logs_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
+  enable_monitoring_endpoint              = true
+  monitoring_endpoint_private_dns_enabled = true
+  monitoring_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+
   tags = {
     Owner       = "user"
     Environment = "staging"
