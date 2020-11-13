@@ -96,6 +96,14 @@ module "standard" {
   monitoring_endpoint_private_dns_enabled = true
   monitoring_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
+  enable_ecs_endpoint              = true
+  ecs_endpoint_private_dns_enabled = true
+  ecs_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+
+  enable_lambda_endpoint              = true
+  lambda_endpoint_private_dns_enabled = true
+  lambda_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+
   tags = {
     Owner       = "user"
     Environment = "staging"

@@ -1007,6 +1007,50 @@ resource "aws_vpc_endpoint" "monitoring" {
 }
 
 ###
+# VPC Endpoint for ECS
+###
+
+data "aws_vpc_endpoint_service" "ecs" {
+  count = "${var.create_vpc && var.enable_ecs_endpoint ? 1 : 0}"
+
+  service = "ecs"
+}
+
+resource "aws_vpc_endpoint" "ecs" {
+  count = "${var.create_vpc && var.enable_ecs_endpoint ? 1 : 0}"
+
+  vpc_id            = "${local.vpc_id}"
+  service_name      = "${element(concat(data.aws_vpc_endpoint_service.ecs.*.service_name, list("")), 0)}"
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids  = ["${split(",", element(concat(var.ecs_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.ecs_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  subnet_ids          = ["${coalescelist(var.ecs_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
+  private_dns_enabled = "${var.ecs_endpoint_private_dns_enabled}"
+}
+
+###
+# VPC Endpoint for Lambda
+###
+
+data "aws_vpc_endpoint_service" "lambda" {
+  count = "${var.create_vpc && var.enable_lambda_endpoint ? 1 : 0}"
+
+  service = "lambda"
+}
+
+resource "aws_vpc_endpoint" "lambda" {
+  count = "${var.create_vpc && var.enable_lambda_endpoint ? 1 : 0}"
+
+  vpc_id            = "${local.vpc_id}"
+  service_name      = "${element(concat(data.aws_vpc_endpoint_service.lambda.*.service_name, list("")), 0)}"
+  vpc_endpoint_type = "Interface"
+
+  security_group_ids  = ["${split(",", element(concat(var.lambda_endpoint_security_group_ids, list("")), 0) != "" ? join(",", var.lambda_endpoint_security_group_ids) : aws_security_group.endpoint.id)}"]
+  subnet_ids          = ["${coalescelist(var.lambda_endpoint_subnet_ids, aws_subnet.private.*.id)}"]
+  private_dns_enabled = "${var.lambda_endpoint_private_dns_enabled}"
+}
+
+###
 # Route table association
 ###
 

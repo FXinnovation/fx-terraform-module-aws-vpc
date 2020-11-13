@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.8.0
+
+* feat: Add ECS endpoint
+* feat: Add Lambda endpoint
+* chore: bump pre-commit
+
 ## 0.7.0
 
 * feat: Add monitoring endpoint
