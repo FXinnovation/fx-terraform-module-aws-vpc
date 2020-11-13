@@ -60,6 +60,14 @@ module "standard" {
   ecr_dkr_endpoint_private_dns_enabled = true
   ecr_dkr_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
 
+  enable_ecs_dkr_endpoint              = true
+  ecs_dkr_endpoint_private_dns_enabled = true
+  ecs_dkr_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+
+  enable_lambda_endpoint              = true
+  lambda_endpoint_private_dns_enabled = true
+  lambda_endpoint_security_group_ids  = [data.aws_security_group.default.id]
+
   tags = {
     Owner       = "user"
     Environment = "staging"
