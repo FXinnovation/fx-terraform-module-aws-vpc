@@ -46,19 +46,27 @@ module "standard" {
 
   enable_ssm_endpoint              = true
   ssm_endpoint_private_dns_enabled = true
-  ssm_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"] # ssm_endpoint_subnet_ids = ["..."]
+  ssm_endpoint_security_group_ids  = [data.aws_security_group.default.id]
 
   enable_ssmmessages_endpoint              = true
   ssmmessages_endpoint_private_dns_enabled = true
-  ssmmessages_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+  ssmmessages_endpoint_security_group_ids  = [data.aws_security_group.default.id]
 
   enable_ecr_api_endpoint              = true
   ecr_api_endpoint_private_dns_enabled = true
-  ecr_api_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+  ecr_api_endpoint_security_group_ids  = [data.aws_security_group.default.id]
 
   enable_ecr_dkr_endpoint              = true
   ecr_dkr_endpoint_private_dns_enabled = true
-  ecr_dkr_endpoint_security_group_ids  = ["${data.aws_security_group.default.id}"]
+  ecr_dkr_endpoint_security_group_ids  = [data.aws_security_group.default.id]
+
+  enable_ecs_endpoint              = true
+  ecs_endpoint_private_dns_enabled = true
+  ecs_endpoint_security_group_ids  = [data.aws_security_group.default.id]
+
+  enable_lambda_endpoint              = true
+  lambda_endpoint_private_dns_enabled = true
+  lambda_endpoint_security_group_ids  = [data.aws_security_group.default.id]
 
   tags = {
     Owner       = "user"
