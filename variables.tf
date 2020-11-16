@@ -472,6 +472,46 @@ variable "monitoring_endpoint_private_dns_enabled" {
   default     = false
 }
 
+variable "enable_ecs_endpoint" {
+  description = "Should be true if you want to provision an ECS endpoint to the VPC"
+  default     = false
+}
+
+variable "ecs_endpoint_security_group_ids" {
+  description = "The ID of one or more security groups to associate with the network interface for ECS endpoint"
+  default     = []
+}
+
+variable "ecs_endpoint_subnet_ids" {
+  description = "The ID of one or more subnets in which to create a network interface for ECS endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used."
+  default     = []
+}
+
+variable "ecs_endpoint_private_dns_enabled" {
+  description = "Whether or not to associate a private hosted zone with the specified VPC for ECS endpoint"
+  default     = false
+}
+
+variable "enable_lambda_endpoint" {
+  description = "Should be true if you want to provision an Lambda endpoint to the VPC"
+  default     = false
+}
+
+variable "lambda_endpoint_security_group_ids" {
+  description = "The ID of one or more security groups to associate with the network interface for Lambda endpoint"
+  default     = []
+}
+
+variable "lambda_endpoint_subnet_ids" {
+  description = "The ID of one or more subnets in which to create a network interface for Lambda endpoint. Only a single subnet within an AZ is supported. If omitted, private subnets will be used."
+  default     = []
+}
+
+variable "lambda_endpoint_private_dns_enabled" {
+  description = "Whether or not to associate a private hosted zone with the specified VPC for Lambda endpoint"
+  default     = false
+}
+
 variable "map_public_ip_on_launch" {
   description = "Should be false if you do not want to auto-assign public IP on launch"
   default     = true
@@ -798,14 +838,15 @@ variable "elasticache_dedicated_network_acl" {
 variable "default_network_acl_ingress" {
   description = "List of maps of ingress rules to set on the Default Network ACL"
 
-  default = [{
-    rule_no    = 100
-    action     = "allow"
-    from_port  = 0
-    to_port    = 0
-    protocol   = "-1"
-    cidr_block = "0.0.0.0/0"
-  },
+  default = [
+    {
+      rule_no    = 100
+      action     = "allow"
+      from_port  = 0
+      to_port    = 0
+      protocol   = "-1"
+      cidr_block = "0.0.0.0/0"
+    },
     {
       rule_no         = 101
       action          = "allow"
@@ -820,14 +861,15 @@ variable "default_network_acl_ingress" {
 variable "default_network_acl_egress" {
   description = "List of maps of egress rules to set on the Default Network ACL"
 
-  default = [{
-    rule_no    = 100
-    action     = "allow"
-    from_port  = 0
-    to_port    = 0
-    protocol   = "-1"
-    cidr_block = "0.0.0.0/0"
-  },
+  default = [
+    {
+      rule_no    = 100
+      action     = "allow"
+      from_port  = 0
+      to_port    = 0
+      protocol   = "-1"
+      cidr_block = "0.0.0.0/0"
+    },
     {
       rule_no         = 101
       action          = "allow"
