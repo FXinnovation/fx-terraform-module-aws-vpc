@@ -16,13 +16,13 @@ This module is not to be deployed directly.
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.6 |
-| aws | ~> 2.23 |
+| aws | ~> 3.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.23 |
+| aws | ~> 3.1 |
 
 ## Inputs
 
@@ -83,7 +83,7 @@ This module is not to be deployed directly.
 | database\_route\_table\_tags | Additional tags for the database route tables | `map(string)` | `{}` | no |
 | database\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on database subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
 | database\_subnet\_group\_tags | Additional tags for the database subnet group | `map(string)` | `{}` | no |
-| database\_subnet\_ipv6\_prefixes | Assigns IPv6 database subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| database\_subnet\_ipv6\_prefixes | Assigns IPv6 database subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | database\_subnet\_suffix | Suffix to append to database subnets name | `string` | `"db"` | no |
 | database\_subnet\_tags | Additional tags for the database subnets | `map(string)` | `{}` | no |
 | database\_subnets | A list of database subnets | `list(string)` | `[]` | no |
@@ -132,7 +132,7 @@ This module is not to be deployed directly.
 | elasticache\_outbound\_acl\_rules | Elasticache subnets outbound network ACL rules | `list(map(string))` | <pre>[<br>  {<br>    "cidr_block": "0.0.0.0/0",<br>    "from_port": 0,<br>    "protocol": "-1",<br>    "rule_action": "allow",<br>    "rule_number": 100,<br>    "to_port": 0<br>  }<br>]</pre> | no |
 | elasticache\_route\_table\_tags | Additional tags for the elasticache route tables | `map(string)` | `{}` | no |
 | elasticache\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on elasticache subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
-| elasticache\_subnet\_ipv6\_prefixes | Assigns IPv6 elasticache subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| elasticache\_subnet\_ipv6\_prefixes | Assigns IPv6 elasticache subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | elasticache\_subnet\_suffix | Suffix to append to elasticache subnets name | `string` | `"elasticache"` | no |
 | elasticache\_subnet\_tags | Additional tags for the elasticache subnets | `map(string)` | `{}` | no |
 | elasticache\_subnets | A list of elasticache subnets | `list(string)` | `[]` | no |
@@ -211,7 +211,7 @@ This module is not to be deployed directly.
 | intra\_outbound\_acl\_rules | Intra subnets outbound network ACLs | `list(map(string))` | <pre>[<br>  {<br>    "cidr_block": "0.0.0.0/0",<br>    "from_port": 0,<br>    "protocol": "-1",<br>    "rule_action": "allow",<br>    "rule_number": 100,<br>    "to_port": 0<br>  }<br>]</pre> | no |
 | intra\_route\_table\_tags | Additional tags for the intra route tables | `map(string)` | `{}` | no |
 | intra\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on intra subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
-| intra\_subnet\_ipv6\_prefixes | Assigns IPv6 intra subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| intra\_subnet\_ipv6\_prefixes | Assigns IPv6 intra subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | intra\_subnet\_suffix | Suffix to append to intra subnets name | `string` | `"intra"` | no |
 | intra\_subnet\_tags | Additional tags for the intra subnets | `map(string)` | `{}` | no |
 | intra\_subnets | A list of intra subnets | `list(string)` | `[]` | no |
@@ -246,7 +246,7 @@ This module is not to be deployed directly.
 | private\_outbound\_acl\_rules | Private subnets outbound network ACLs | `list(map(string))` | <pre>[<br>  {<br>    "cidr_block": "0.0.0.0/0",<br>    "from_port": 0,<br>    "protocol": "-1",<br>    "rule_action": "allow",<br>    "rule_number": 100,<br>    "to_port": 0<br>  }<br>]</pre> | no |
 | private\_route\_table\_tags | Additional tags for the private route tables | `map(string)` | `{}` | no |
 | private\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on private subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
-| private\_subnet\_ipv6\_prefixes | Assigns IPv6 private subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| private\_subnet\_ipv6\_prefixes | Assigns IPv6 private subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | private\_subnet\_suffix | Suffix to append to private subnets name | `string` | `"private"` | no |
 | private\_subnet\_tags | Additional tags for the private subnets | `map(string)` | `{}` | no |
 | private\_subnets | A list of private subnets inside the VPC | `list(string)` | `[]` | no |
@@ -258,7 +258,7 @@ This module is not to be deployed directly.
 | public\_outbound\_acl\_rules | Public subnets outbound network ACLs | `list(map(string))` | <pre>[<br>  {<br>    "cidr_block": "0.0.0.0/0",<br>    "from_port": 0,<br>    "protocol": "-1",<br>    "rule_action": "allow",<br>    "rule_number": 100,<br>    "to_port": 0<br>  }<br>]</pre> | no |
 | public\_route\_table\_tags | Additional tags for the public route tables | `map(string)` | `{}` | no |
 | public\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on public subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
-| public\_subnet\_ipv6\_prefixes | Assigns IPv6 public subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| public\_subnet\_ipv6\_prefixes | Assigns IPv6 public subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | public\_subnet\_suffix | Suffix to append to public subnets name | `string` | `"public"` | no |
 | public\_subnet\_tags | Additional tags for the public subnets | `map(string)` | `{}` | no |
 | public\_subnets | A list of public subnets inside the VPC | `list(string)` | `[]` | no |
@@ -269,7 +269,7 @@ This module is not to be deployed directly.
 | redshift\_route\_table\_tags | Additional tags for the redshift route tables | `map(string)` | `{}` | no |
 | redshift\_subnet\_assign\_ipv6\_address\_on\_creation | Assign IPv6 address on redshift subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map\_public\_ip\_on\_launch | `bool` | `null` | no |
 | redshift\_subnet\_group\_tags | Additional tags for the redshift subnet group | `map(string)` | `{}` | no |
-| redshift\_subnet\_ipv6\_prefixes | Assigns IPv6 redshift subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list` | `[]` | no |
+| redshift\_subnet\_ipv6\_prefixes | Assigns IPv6 redshift subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list | `list(any)` | `[]` | no |
 | redshift\_subnet\_suffix | Suffix to append to redshift subnets name | `string` | `"redshift"` | no |
 | redshift\_subnet\_tags | Additional tags for the redshift subnets | `map(string)` | `{}` | no |
 | redshift\_subnets | A list of redshift subnets | `list(string)` | `[]` | no |
