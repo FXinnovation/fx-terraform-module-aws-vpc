@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+* chore: bump pre-commit hooks
+
 ## 1.1.0
 
 * feat: add Lambda endpoint
