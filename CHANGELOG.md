@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.8.1
+
+* fix: workaround for new S3 endpoint type (<https://github.com/terraform-aws-modules/terraform-aws-vpc/issues/571>)
+* chore: bump pre-commit
+* chore: pin pre-commit image
+
 ## 0.8.0
 
 * feat: Add ECS endpoint

@@ -9,6 +9,8 @@ locals {
   vpc_id = "${element(concat(aws_vpc_ipv4_cidr_block_association.this.*.vpc_id, aws_vpc.this.*.id, list("")), 0)}"
 }
 
+data "aws_region" "this" {}
+
 ######
 # VPC
 ######
@@ -679,17 +681,11 @@ resource "aws_route" "private_nat_gateway" {
 # Endpoint for S3
 ###
 
-data "aws_vpc_endpoint_service" "s3" {
-  count = "${var.create_vpc && var.enable_s3_endpoint ? 1 : 0}"
-
-  service = "s3"
-}
-
 resource "aws_vpc_endpoint" "s3" {
   count = "${var.create_vpc && var.enable_s3_endpoint ? 1 : 0}"
 
   vpc_id       = "${local.vpc_id}"
-  service_name = "${data.aws_vpc_endpoint_service.s3.service_name}"
+  service_name = "${format("com.amazonaws.%s.s3", data.aws_region.this.name)}"
 }
 
 resource "aws_vpc_endpoint_route_table_association" "private_s3" {
