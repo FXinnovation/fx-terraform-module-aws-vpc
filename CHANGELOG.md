@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.1
+
+* fix: workaround for new S3 endpoint type (<https://github.com/terraform-aws-modules/terraform-aws-vpc/issues/571>)
+* chore: bump pre-commit hooks
+
 ## 1.1.0
 
 * feat: add Lambda endpoint
