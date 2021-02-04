@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.2
+
+* fix: permit TF version > 0.12
+
 ## 1.1.1
 
 * fix: workaround for new S3 endpoint type (<https://github.com/terraform-aws-modules/terraform-aws-vpc/issues/571>)

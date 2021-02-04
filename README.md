@@ -15,7 +15,7 @@ This module is not to be deployed directly.
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.6 |
+| terraform | >= 0.12 |
 | aws | ~> 3.1 |
 
 ## Providers
